@@ -1,8 +1,4 @@
-interface IUser {
-    email: string
-    name: string
-    password: string
-}
+
 
 interface IAuthenticatedUser {
     email: string
@@ -19,4 +15,15 @@ export interface IIcon {
     name: string
     id: string
     symbol: string
+}
+
+export interface IUser {
+    name: string;
+    email: string;
+    password: string;
+}
+
+export interface ILogin {
+    email: string;
+    password: string;
 }

@@ -15,9 +15,11 @@ const Input = ({ label, error, ...props }: InputProps) => {
             </Text>
             <TextInput
                 style={{
+                    backgroundColor: "#fff"
+                    ,
                     padding: 16,
                     borderWidth: 1,
-                    borderColor: error ? theme.colors.rose500 : theme.colors.grey,
+                    borderColor: error ? "#f5f41f" : "#3C3C43",
                     borderRadius: theme.borderRadii["rounded-7xl"],
                 }}
                 {...props}

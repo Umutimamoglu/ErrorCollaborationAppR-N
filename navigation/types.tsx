@@ -22,7 +22,10 @@ export type AuthStackParamList = {
 export type RootBottomTabParamList = {
     HomeStack: NavigatorScreenParams<HomeStackParamlist>
     Today: undefined
-    Completed: undefined
+    Fixed: undefined
+
+    Feed: undefined
+    Profile: undefined
     CategoriesStack: NavigatorScreenParams<CategoriesStackParamList>
 }
 
@@ -35,4 +38,11 @@ export type CategoriesStackParamList = {
 
     }
 }
+
+export type AuthScreenNavigationType<
+    RouteName extends keyof AuthStackParamList
+> = CompositeNavigationProp<
+    NativeStackNavigationProp<AuthStackParamList, RouteName>,
+    NativeStackNavigationProp<AppStackParamList, "Root">
+>
 

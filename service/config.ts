@@ -1,36 +1,19 @@
-import axios from "axios"
-import * as SecureStore from "expo-secure-store"
-export const BASE_URL = "http://192.168.1.103:1337";
-// export const BASE_URL = "https://production-blossom-app.onrender.com/"
+import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const TIME_OUT = 30000
-export const ERRORCOL_TOKEN_NAME = "errorcol_user_token"
+export const BASE_URL = `http://192.168.1.102:${process.env.PORT || 1337}`;
 
-const axiosInstance = axios.create({
+const instance = axios.create({
     baseURL: BASE_URL,
-    timeout: TIME_OUT,
-})
+    timeout: 30000,
+});
 
-export const saveToken = async (key: string, value: string) => {
-    try {
-        await SecureStore.setItemAsync(key, value)
-    } catch (error) {
-        console.log("error in saveToken", error)
-        throw error
+instance.interceptors.request.use(async (config) => {
+    const token = await AsyncStorage.getItem('userToken');
+    if (token) {
+        config.headers.Authorization = `Bearer ${token}`;
     }
-}
+    return config;
+});
 
-axiosInstance.interceptors.request.use(async (req) => {
-    try {
-        const access_token = await SecureStore.getItemAsync(ERRORCOL_TOKEN_NAME)
-        req.headers.Authorization = access_token
-        return req
-    } catch (error) {
-        return req
-    }
-})
-
-export const fetcher = (url: string) =>
-    axiosInstance.get(url).then((res) => res.data)
-
-export default axiosInstance
+export default instance;

@@ -14,12 +14,13 @@ const Button = ({ label, onLongPress, onPress, disabled, uppercase }: ButtonProp
     return (
         <Pressable onPress={onPress} onLongPress={onLongPress} disabled={disabled}>
             <Box
-                bg={disabled ? "gray800" : "primary"}
+                width={250}
+                bg={disabled ? "blu500" : "red500"}
                 py="3.5"
                 borderRadius="rounded-7xl"
             >
                 <Text
-                    variant="textXs"
+                    variant="textXl"
                     fontWeight={"700"}
                     color="white"
                     textAlign="center"

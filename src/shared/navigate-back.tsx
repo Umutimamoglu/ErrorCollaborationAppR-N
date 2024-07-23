@@ -2,11 +2,11 @@ import React from 'react'
 import { useNavigation } from '@react-navigation/native'
 import { Pressable } from 'react-native'
 import { Box } from '../../utils/theme'
-
+import { Entypo } from '@expo/vector-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { faBackwardStep } from '@fortawesome/free-solid-svg-icons';
 
-const iconSize: 24 | 32 | 48 | 64 | 96 | 128 = 24;
+
+
 
 const NavigateBack = () => {
 
@@ -17,8 +17,8 @@ const NavigateBack = () => {
 
     return (
         <Pressable onPress={navigateBack}>
-            <Box bg="gray100" p="3" borderRadius="rounded-7xl">
-                <FontAwesomeIcon icon={faBackwardStep} size={iconSize} color="brown" />
+            <Box mt="2" bg="gray100" borderRadius="rounded-7xl">
+                <Entypo name="chevron-small-left" size={40} color="black" />
             </Box>
         </Pressable>
     )
