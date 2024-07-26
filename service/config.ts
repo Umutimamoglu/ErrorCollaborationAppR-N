@@ -1,19 +1,39 @@
-import axios from 'axios';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import axios from "axios";
+import * as SecureStore from "expo-secure-store";
 
-export const BASE_URL = `http://192.168.1.102:${process.env.PORT || 1337}`;
+export const BASE_URL = "http://192.168.1.102:1337";
+// export const BASE_URL = "https://production-blossom-app.onrender.com/"
 
-const instance = axios.create({
+const TIME_OUT = 30000;
+export const BLOSSOM_TOKEN_NAME = "blossom_user_token";
+
+const axiosInstance = axios.create({
     baseURL: BASE_URL,
-    timeout: 30000,
+    timeout: TIME_OUT,
 });
 
-instance.interceptors.request.use(async (config) => {
-    const token = await AsyncStorage.getItem('userToken');
-    if (token) {
-        config.headers.Authorization = `Bearer ${token}`;
+export const saveToken = async (key: string, value: string) => {
+    try {
+        await SecureStore.setItemAsync(key, value);
+    } catch (error) {
+        console.log("error in saveToken", error);
+        throw error;
     }
-    return config;
+};
+
+axiosInstance.interceptors.request.use(async (req) => {
+    try {
+        const access_token = await SecureStore.getItemAsync(BLOSSOM_TOKEN_NAME);
+        if (access_token) {
+            req.headers.Authorization = `Bearer ${access_token}`;
+        }
+        return req;
+    } catch (error) {
+        return req;
+    }
 });
 
-export default instance;
+export const fetcher = (url: string) =>
+    axiosInstance.get(url).then((res) => res.data);
+
+export default axiosInstance;

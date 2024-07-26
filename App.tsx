@@ -5,8 +5,19 @@ import theme from './utils/theme';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import Navigation from './navigation';
 import { SWRConfig } from 'swr';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useEffect } from 'react';
 
 export default function App() {
+  useEffect(() => {
+    const clearStorage = async () => {
+      await AsyncStorage.clear();
+      console.log('AsyncStorage cleared');
+    };
+
+    clearStorage();
+  }, []);
+
   return (
     <ThemeProvider theme={theme}>
       <SafeAreaProvider>
@@ -39,5 +50,3 @@ export default function App() {
     </ThemeProvider>
   );
 }
-
-

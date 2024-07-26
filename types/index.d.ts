@@ -27,3 +27,24 @@ export interface ILogin {
     email: string;
     password: string;
 }
+
+export interface CreateError {
+
+
+    name: string;
+    isFixed: boolean;
+    language: string;
+    image?: string;
+    color?: string;
+
+
+}
+
+export interface ICreateErrorRequest {
+    name: string;
+    isFixed: boolean;
+    language: string;
+    image?: string;
+    color?: string;
+
+}

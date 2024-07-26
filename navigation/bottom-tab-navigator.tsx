@@ -3,13 +3,14 @@ import { RootBottomTabParamList } from "./types";
 import HomeStackNavigator from "./home-stack-navigator";
 
 
-import { color, useTheme } from "@shopify/restyle";
+
 import Icons from "../src/shared/icons";
 import ProfileScreen from "../screens/profile-screen";
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faUser, faSquareCheck } from '@fortawesome/free-solid-svg-icons';
 import FixedScreen from "../screens/FixedScreen";
 import { MaterialIcons } from '@expo/vector-icons';
+import { useTheme } from "@shopify/restyle";
 
 
 const Tab = createBottomTabNavigator<RootBottomTabParamList>()
@@ -22,6 +23,10 @@ const BottomTabNavigator = () => {
                 tabBarActiveTintColor: "black",
                 tabBarInactiveTintColor: theme.colors.gray550,
                 tabBarHideOnKeyboard: true,
+                tabBarStyle: {
+                    backgroundColor: theme.colors.zinc300, // Arka plan rengi burada ayarlanıyor
+                    borderTopColor: "transparent" // Eğer tab bar üst çizgini kaldırmak istiyorsanız
+                }
             }}
         >
             <Tab.Screen

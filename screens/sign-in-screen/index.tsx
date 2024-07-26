@@ -12,7 +12,6 @@ import Input from '../../src/shared/input';
 import Button from '../../src/shared/button';
 import NavigateBack from '../../src/shared/navigate-back';
 
-
 const SignInScreen = () => {
     const navigation = useNavigation<AuthScreenNavigationType<"SignIn">>();
     const navigateToSignUpScreen = () => {
@@ -23,7 +22,7 @@ const SignInScreen = () => {
     const {
         control,
         handleSubmit,
-        formState: { errors }, // bu sayede veri formdan alınıp ileitiliyor
+        formState: { errors },
     } = useForm<Omit<IUser, "name">>({
         defaultValues: {
             email: "",
@@ -34,14 +33,16 @@ const SignInScreen = () => {
     const onSubmit = async (data: Omit<IUser, "name">) => {
         try {
             const { email, password } = data;
-            console.log("Form verileri:", data); // Form verilerini kontrol edin
+            console.log("Form verileri:", data);
             const _user = await loginUser({
                 email: email.toLowerCase(),
                 password: password,
             });
+            console.log("Login response:", _user);
             updateUser({
                 email: _user.email,
                 name: _user.name,
+
             });
         } catch (error) {
             console.log("Error logging in user:", error);
@@ -57,7 +58,6 @@ const SignInScreen = () => {
                         tekrar hos geldiniz
                     </Text>
                 </Box>
-
                 <Box p="10" />
                 <Controller
                     control={control}
@@ -74,7 +74,6 @@ const SignInScreen = () => {
                     )}
                 />
                 <Box mb='6' />
-
                 <Controller
                     control={control}
                     name="password"
@@ -86,28 +85,22 @@ const SignInScreen = () => {
                             onChangeText={onChange}
                             value={value}
                             error={error}
+                            secureTextEntry
                         />
                     )}
                 />
                 <Box mt='5.5' />
-
                 <Pressable onPress={navigateToSignUpScreen}>
                     <Text color="red500" textAlign='right'>
                         Kayıt?
                     </Text>
                 </Pressable>
-
                 <Box mt="12" ml="10">
-
                     <Button label='Giriş Yap' onPress={handleSubmit(onSubmit)} uppercase />
                 </Box>
-
-
-
             </Box>
         </SafeAreaWraper>
     );
 };
 
-
-export default SignInScreen
+export default SignInScreen;

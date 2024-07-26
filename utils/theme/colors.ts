@@ -44,6 +44,7 @@ export const palette = {
     zinc300: "#d4d4d8",
     zinc400: "#D8D0D0",
     zinc500: "#71717a",
+    zinc540: "#C2C1C1",
     zinc550: "#848488",
     zinc600: "#52525b",
     zinc700: "#3f3f46",
