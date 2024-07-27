@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Pressable, TextInput, Image, StyleSheet } from 'react-native';
+import { Pressable, TextInput, Image, StyleSheet, PermissionsAndroid, Platform } from 'react-native';
 import { useTheme } from '@shopify/restyle';
 import { Box, Text, Theme } from '../../utils/theme';
 import SafeAreaWrapper from '../../src/shared/safe-area-wrapper';
@@ -9,12 +9,13 @@ import useSWRMutation from 'swr/mutation';
 import axiosInstance, { BASE_URL } from '../../service/config';
 import { RouteProp, useNavigation } from '@react-navigation/native';
 import { CreateError, ICreateErrorRequest, IColor } from '../../types';
-import { launchImageLibrary, launchCamera, ImagePickerResponse } from 'react-native-image-picker';
+import { launchImageLibrary, launchCamera, ImagePickerResponse, CameraOptions, ImageLibraryOptions } from 'react-native-image-picker';
 import { getColors } from '../../utils/heplers';
 import { CategoriesStackParamList } from '../../navigation/types';
 import SearchableDropdown from 'react-native-searchable-dropdown';
 import axios from 'axios';
 import { MaterialIcons } from '@expo/vector-icons';
+import { check, request, PERMISSIONS, RESULTS } from 'react-native-permissions';
 
 const COLORS = getColors();
 const PROGRAMMING_LANGUAGES = [
@@ -67,11 +68,9 @@ type CreateErrorRouteTypes = RouteProp<
 >;
 
 function HomeScreen() {
-
     const [selectedLanguage, setSelectedLanguage] = useState('');
     const [selectedErrorType, setselectedErrorType] = useState('');
     const [image, setImage] = useState<string | null>(null);
-
     const theme = useTheme<Theme>();
 
     const { trigger } = useSWRMutation(
@@ -122,39 +121,87 @@ function HomeScreen() {
         }));
     };
 
-    const chooseImage = async () => {
-        let result: ImagePickerResponse = await launchImageLibrary({
-            mediaType: 'photo',
-            maxWidth: 200,
-            maxHeight: 200,
-            includeBase64: true
-        });
 
-        if (result.assets?.[0]?.uri) {
-            setImage(result.assets[0].uri || null);
-            setNewError((prev) => ({
-                ...prev,
-                image: result.assets?.[0]?.base64 || "",
-            }));
+    const requestCameraPermission = async () => {
+        if (Platform.OS === 'ios') {
+            const result = await request(PERMISSIONS.IOS.CAMERA);
+            return result === RESULTS.GRANTED;
+        } else {
+            const result = await PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.CAMERA);
+            return result === PermissionsAndroid.RESULTS.GRANTED;
         }
+    };
+
+    const requestStoragePermission = async () => {
+        if (Platform.OS === 'ios') {
+            const result = await request(PERMISSIONS.IOS.PHOTO_LIBRARY);
+            return result === RESULTS.GRANTED;
+        } else {
+            const result = await PermissionsAndroid.request(
+                PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE
+            );
+            return result === PermissionsAndroid.RESULTS.GRANTED;
+        }
+    };
+
+    const uploadImage = async (imageUri: string) => {
+        const formData = new FormData();
+        formData.append('image', {
+            uri: imageUri,
+            name: 'photo.jpg',
+            type: 'image/jpeg'
+        } as unknown as Blob);
+
+        try {
+            const response = await axios.post('YourBackendEndpoint', formData, {
+                headers: { 'Content-Type': 'multipart/form-data' },
+            });
+            console.log('Upload success:', response.data);
+        } catch (error) {
+            console.error('Upload error:', error);
+        }
+    };
+
+    const selectImageFromLibrary = async () => {
+        const hasPermission = await requestStoragePermission();
+        if (!hasPermission) return;
+
+        const options: ImageLibraryOptions = { mediaType: 'photo', quality: 1 };
+        launchImageLibrary(options, (response) => {
+            if (response.didCancel) {
+                console.log('User cancelled image selection');
+            } else if (response.errorCode) {
+                console.log('ImagePicker Error: ', response.errorCode);
+            } else if (response.assets) {
+                const source = response.assets[0]?.uri || null;
+                setImage(source);
+                if (source) {
+                    uploadImage(source);
+                }
+            }
+        });
     };
 
     const captureImage = async () => {
-        let result: ImagePickerResponse = await launchCamera({
-            mediaType: 'photo',
-            maxWidth: 200,
-            maxHeight: 200,
-            includeBase64: true
-        });
+        const hasPermission = await requestCameraPermission();
+        if (!hasPermission) return;
 
-        if (result.assets?.[0]?.uri) {
-            setImage(result.assets[0].uri || null);
-            setNewError((prev) => ({
-                ...prev,
-                image: result.assets?.[0]?.base64 || "",
-            }));
-        }
+        const options: CameraOptions = { mediaType: 'photo', quality: 1 };
+        launchCamera(options, (response) => {
+            if (response.didCancel) {
+                console.log('User cancelled image capture');
+            } else if (response.errorCode) {
+                console.log('ImagePicker Error: ', response.errorCode);
+            } else if (response.assets) {
+                const source = response.assets[0]?.uri || null;
+                setImage(source);
+                if (source) {
+                    uploadImage(source);
+                }
+            }
+        });
     };
+
 
     return (
         <SafeAreaWrapper>
@@ -164,7 +211,7 @@ function HomeScreen() {
                     Yeni hata oluştur!!!
                 </Text>
                 <Box alignItems="center" mb="2">
-                    <Pressable onPress={chooseImage} style={styles.pressable}>
+                    <Pressable onPress={selectImageFromLibrary} style={styles.pressable}>
                         <MaterialIcons name="photo-library" size={24} color="black" />
                         <Text>Galeri</Text>
                     </Pressable>
