@@ -11,6 +11,7 @@ import { faUser, faSquareCheck } from '@fortawesome/free-solid-svg-icons';
 import FixedScreen from "../screens/FixedScreen";
 import { MaterialIcons } from '@expo/vector-icons';
 import { useTheme } from "@shopify/restyle";
+import React from "react";
 
 
 const Tab = createBottomTabNavigator<RootBottomTabParamList>()

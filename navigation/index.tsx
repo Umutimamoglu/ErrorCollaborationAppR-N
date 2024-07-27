@@ -3,8 +3,8 @@ import useUserGlobalStore from '../store/useUserGlobalStore';
 import AppStackNavigator from './app-stack-navigator';
 import AuthStackNavigator from './auth-stack-navigator';
 import { useEffect, useState } from 'react';
-import { View, ActivityIndicator } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import React from 'react';
 
 const Navigation = () => {
     const { user, updateUser } = useUserGlobalStore();
@@ -29,13 +29,7 @@ const Navigation = () => {
         checkUser();
     }, []);
 
-    if (loading) {
-        return (
-            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                <ActivityIndicator size="large" />
-            </View>
-        );
-    }
+
 
     return (
         <NavigationContainer>

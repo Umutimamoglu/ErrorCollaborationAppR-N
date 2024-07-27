@@ -29,15 +29,12 @@ export interface ILogin {
 }
 
 export interface CreateError {
-
-
     name: string;
     isFixed: boolean;
     language: string;
     image?: string;
     color?: string;
-
-
+    type: string; // 'type' artık zorunlu
 }
 
 export interface ICreateErrorRequest {
@@ -46,5 +43,5 @@ export interface ICreateErrorRequest {
     language: string;
     image?: string;
     color?: string;
-
+    type: string;
 }
