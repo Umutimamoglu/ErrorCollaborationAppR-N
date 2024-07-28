@@ -206,7 +206,6 @@ function HomeScreen() {
     return (
         <SafeAreaWrapper>
             <Box flex={1} mx="6" justifyContent="center">
-                <Box height={2} />
                 <Text variant="textXl" textAlign="center" mb="4">
                     Yeni hata oluştur!!!
                 </Text>

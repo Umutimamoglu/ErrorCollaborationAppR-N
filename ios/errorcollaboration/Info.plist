@@ -68,5 +68,11 @@
     <string>Light</string>
     <key>UIViewControllerBasedStatusBarAppearance</key>
     <false/>
+
+    <!-- Gerekli İzinler -->
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>Fotoğraflarınıza erişmemize izin verin.</string>
+    <key>NSCameraUsageDescription</key>
+    <string>Kameranıza erişmemize izin verin.</string>
   </dict>
 </plist>
