@@ -18,9 +18,8 @@ export const registerUser = async ({
         return response.data.user;
     } catch (error) {
         if (error instanceof AxiosError) {
-            console.log("error response data:", error.response?.data);
-            console.log("error request:", error.request);
-            console.log("error message:", error.message);
+
+
         } else {
             console.log("unexpected error:", error);
         }
@@ -36,16 +35,14 @@ export const loginUser = async ({ email, password }: LoginUserTypes) => {
             email,
             password,
         });
-        console.log("Login response:", response.data); // Yanıt verilerini kontrol edin
+
         const _token = response.data.token;
         axiosInstance.defaults.headers.common["Authorization"] = _token;
         await saveToken(BLOSSOM_TOKEN_NAME, _token);
         return response.data.user;
     } catch (error) {
         if (error instanceof AxiosError) {
-            console.log("error response data:", error.response?.data);
-            console.log("error request:", error.request);
-            console.log("error message:", error.message);
+
         } else {
             console.log("unexpected error:", error);
         }

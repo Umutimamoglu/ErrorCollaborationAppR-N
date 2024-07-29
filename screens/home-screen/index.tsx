@@ -42,19 +42,19 @@ const DEFAULT_ERROR = ERROR_TYPES[0];
 
 const CreateErrorRequest = async (
     url: string,
-    { arg }: { arg: ICreateErrorRequest }
+    { arg }: { arg: FormData }
 ) => {
     try {
-        console.log('Request payload:', arg);
-        const response = await axiosInstance.post(url, {
-            ...arg,
+
+        const response = await axiosInstance.post(url, arg, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
         });
-        console.log('Response:', response);
+
     } catch (error) {
         if (axios.isAxiosError(error)) {
-            console.log('Axios error response data:', error.response?.data);
-            console.log('Axios error request:', error.request);
-            console.log('Axios error message:', error.message);
+
         } else {
             console.log('Unexpected error:', error);
         }
@@ -69,8 +69,8 @@ type CreateErrorRouteTypes = RouteProp<
 
 function HomeScreen() {
     const [selectedLanguage, setSelectedLanguage] = useState('');
-    const [selectedErrorType, setselectedErrorType] = useState('');
-    const [image, setImage] = useState<string | null>(null);
+    const [selectedErrorType, setSelectedErrorType] = useState('');
+    const [image, setImage] = useState<string>(''); // image değişkenini string olarak tanımlayın
     const theme = useTheme<Theme>();
 
     const { trigger } = useSWRMutation(
@@ -79,7 +79,6 @@ function HomeScreen() {
     );
 
     const { mutate } = useSWRConfig();
-
     const [newError, setNewError] = useState<CreateError>({
         name: '',
         color: DEFAULT_COLOR.name,
@@ -97,12 +96,24 @@ function HomeScreen() {
     const createNewError = async () => {
         console.log('createNewError called');
         try {
-            await trigger({
-                ...newError,
-            });
+            const formData = new FormData();
+            formData.append('name', newError.name);
+            formData.append('color', newError.color);
+            formData.append('isFixed', newError.isFixed.toString());
+            formData.append('language', newError.language);
+            formData.append('type', newError.type);
+            if (image) {
+                formData.append('image', {
+                    uri: image,
+                    name: 'photo.jpg',
+                    type: 'image/jpeg'
+                } as any);
+            }
+
+            await trigger(formData);
             await mutate(BASE_URL + 'api/errors/create');
         } catch (error) {
-            console.log('error in createNewError', error);
+
             throw error;
         }
     };
@@ -120,7 +131,6 @@ function HomeScreen() {
             language,
         }));
     };
-
 
     const requestCameraPermission = async () => {
         if (Platform.OS === 'ios') {
@@ -144,24 +154,6 @@ function HomeScreen() {
         }
     };
 
-    const uploadImage = async (imageUri: string) => {
-        const formData = new FormData();
-        formData.append('image', {
-            uri: imageUri,
-            name: 'photo.jpg',
-            type: 'image/jpeg'
-        } as unknown as Blob);
-
-        try {
-            const response = await axios.post('YourBackendEndpoint', formData, {
-                headers: { 'Content-Type': 'multipart/form-data' },
-            });
-            console.log('Upload success:', response.data);
-        } catch (error) {
-            console.error('Upload error:', error);
-        }
-    };
-
     const selectImageFromLibrary = async () => {
         const hasPermission = await requestStoragePermission();
         if (!hasPermission) return;
@@ -171,13 +163,10 @@ function HomeScreen() {
             if (response.didCancel) {
                 console.log('User cancelled image selection');
             } else if (response.errorCode) {
-                console.log('ImagePicker Error: ', response.errorCode);
+
             } else if (response.assets) {
-                const source = response.assets[0]?.uri || null;
+                const source = response.assets[0]?.uri || '';
                 setImage(source);
-                if (source) {
-                    uploadImage(source);
-                }
             }
         });
     };
@@ -193,15 +182,11 @@ function HomeScreen() {
             } else if (response.errorCode) {
                 console.log('ImagePicker Error: ', response.errorCode);
             } else if (response.assets) {
-                const source = response.assets[0]?.uri || null;
+                const source = response.assets[0]?.uri || '';
                 setImage(source);
-                if (source) {
-                    uploadImage(source);
-                }
             }
         });
     };
-
 
     return (
         <SafeAreaWrapper>
@@ -214,11 +199,7 @@ function HomeScreen() {
                         <MaterialIcons name="photo-library" size={24} color="black" />
                         <Text>Galeri</Text>
                     </Pressable>
-                    <Pressable onPress={captureImage} style={styles.pressable}>
-                        <MaterialIcons name="camera-alt" size={24} color="black" />
-                        <Text>Kamera</Text>
-                    </Pressable>
-                    {image && <Image source={{ uri: image }} style={styles.image} />}
+
                 </Box>
                 <Box bg="gray250" borderRadius="rounded-2xl" mb="4">
                     <SearchableDropdown
@@ -260,7 +241,7 @@ function HomeScreen() {
                 <Box bg="gray250" borderRadius="rounded-2xl" mb="4">
                     <SearchableDropdown
                         onItemSelect={(item) => {
-                            setselectedErrorType(item.name);
+                            setSelectedErrorType(item.name);
                             updateErrorType(item.name);
                         }}
                         containerStyle={{ padding: 5 }}
@@ -325,6 +306,7 @@ function HomeScreen() {
                         <Text
                             variant="textXs"
                             fontWeight="600"
+
                             color={newError.color as keyof Theme['colors']}
                         >
                             Colors
@@ -350,11 +332,11 @@ function HomeScreen() {
                         ))}
                     </Box>
                 </Box>
-                <Box mb="4">
+                <Box mb="1" alignItems='center'>
                     <Button
                         label="Hata Ekle"
                         onPress={() => {
-                            console.log('Button pressed'); // Bu satırı ekleyin
+
                             createNewError();
                         }}
                     />
@@ -375,8 +357,8 @@ const styles = StyleSheet.create({
         borderRadius: 5,
     },
     image: {
-        width: 200,
-        height: 200,
+        width: 100,
+        height: 100,
         marginTop: 10,
     },
 });

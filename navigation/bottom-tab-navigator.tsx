@@ -45,7 +45,9 @@ const BottomTabNavigator = () => {
                 component={FixedScreen}
                 options={() => ({
                     title: "Feed",
-                    tabBarIcon: ({ color }) => <MaterialIcons name="error-outline" size={24} color="black" />,
+                    tabBarIcon: ({ color, size }) => (
+                        <MaterialIcons name="rss-feed" color={color} size={size} />
+                    ),
                     headerShown: false,
                 })}
             />
@@ -53,8 +55,8 @@ const BottomTabNavigator = () => {
                 name="Fixed"
                 component={FixedScreen}
                 options={() => ({
-                    title: "Fixed",
-                    tabBarIcon: ({ color }) => <FontAwesomeIcon icon={faSquareCheck} color={color} />,
+                    title: "Bugs",
+                    tabBarIcon: ({ color }) => <MaterialIcons name="error-outline" size={24} color="black" />,
                     headerShown: false,
                 })}
             />

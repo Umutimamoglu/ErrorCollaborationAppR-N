@@ -33,7 +33,7 @@ const SignInScreen = () => {
     const onSubmit = async (data: Omit<IUser, "name">) => {
         try {
             const { email, password } = data;
-            console.log("Form verileri:", data);
+
             const _user = await loginUser({
                 email: email.toLowerCase(),
                 password: password,

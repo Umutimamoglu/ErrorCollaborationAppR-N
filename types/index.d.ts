@@ -33,7 +33,7 @@ export interface CreateError {
     isFixed: boolean;
     language: string;
     image?: string;
-    color?: string;
+    color: string;
     type: string; // 'type' artık zorunlu
 }
 
@@ -41,7 +41,7 @@ export interface ICreateErrorRequest {
     name: string;
     isFixed: boolean;
     language: string;
-    image?: string;
+    image?: string | null;
     color?: string;
     type: string;
 }

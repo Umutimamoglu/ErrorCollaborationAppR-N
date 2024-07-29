@@ -1189,6 +1189,15 @@ PODS:
     - React-Core
   - RNCPicker (2.7.7):
     - React-Core
+  - RNImageCropPicker (0.41.2):
+    - React-Core
+    - React-RCTImage
+    - RNImageCropPicker/QBImagePickerController (= 0.41.2)
+    - TOCropViewController (~> 2.7.4)
+  - RNImageCropPicker/QBImagePickerController (0.41.2):
+    - React-Core
+    - React-RCTImage
+    - TOCropViewController (~> 2.7.4)
   - RNPermissions (3.0.4):
     - React-Core
   - RNReanimated (3.10.1):
@@ -1258,6 +1267,7 @@ PODS:
     - ReactCommon/turbomodule/core
     - Yoga
   - SocketRocket (0.7.0)
+  - TOCropViewController (2.7.4)
   - Yoga (0.0.0)
 
 DEPENDENCIES:
@@ -1329,6 +1339,7 @@ DEPENDENCIES:
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
   - "RNCAsyncStorage (from `../node_modules/@react-native-async-storage/async-storage`)"
   - "RNCPicker (from `../node_modules/@react-native-picker/picker`)"
+  - RNImageCropPicker (from `../node_modules/react-native-image-crop-picker`)
   - RNPermissions (from `../node_modules/react-native-permissions`)
   - RNReanimated (from `../node_modules/react-native-reanimated`)
   - RNScreens (from `../node_modules/react-native-screens`)
@@ -1339,6 +1350,7 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - SocketRocket
+    - TOCropViewController
 
 EXTERNAL SOURCES:
   boost:
@@ -1473,6 +1485,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/@react-native-async-storage/async-storage"
   RNCPicker:
     :path: "../node_modules/@react-native-picker/picker"
+  RNImageCropPicker:
+    :path: "../node_modules/react-native-image-crop-picker"
   RNPermissions:
     :path: "../node_modules/react-native-permissions"
   RNReanimated:
@@ -1553,12 +1567,14 @@ SPEC CHECKSUMS:
   ReactCommon: 4d15fcb03c1d4086b0d6817bf28032e9da874c75
   RNCAsyncStorage: 826b603ae9c0f88b5ac4e956801f755109fa4d5c
   RNCPicker: b7873ba797dc586bfaf3307d737cbdc620a9ff3e
+  RNImageCropPicker: 771e2ca319d2cf92e04ebf334ece892ee9a6728f
   RNPermissions: c46788f4cd402287425983e04a4c9bb4356036eb
   RNReanimated: d6284e5ba8c4481cca1b2e1e60a9b8a58417869b
   RNScreens: 4e9248a76e35421013de772f5fefa73d7b039d05
   RNSVG: 43b64ed39c14ce830d840903774154ca0c1f27ec
   RNVectorIcons: c6689df230427641f2313e35365855eb4cd1a0dd
   SocketRocket: abac6f5de4d4d62d24e11868d7a2f427e0ef940d
+  TOCropViewController: 80b8985ad794298fb69d3341de183f33d1853654
   Yoga: 04f1db30bb810187397fa4c37dd1868a27af229c
 
 PODFILE CHECKSUM: 55d5daa6a089400c91926e74005f73d4d2c61773
