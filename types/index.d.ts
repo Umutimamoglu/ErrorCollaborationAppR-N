@@ -38,10 +38,22 @@ export interface CreateError {
 }
 
 export interface ICreateErrorRequest {
+
+
     name: string;
     isFixed: boolean;
     language: string;
     image?: string | null;
     color?: string;
     type: string;
+}
+
+export interface IBug {
+    _id: string
+    name: string;
+    isFixed: boolean;
+    language: string;
+    image?: string;
+    color: string;
+    type: string; // 'type' artık zorunlu
 }

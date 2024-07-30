@@ -1,12 +1,12 @@
 import { View, Text } from 'react-native'
 import React from 'react'
 
-const FixedScreen = () => {
+const BugDetailScreen = () => {
     return (
         <View>
-            <Text>FixedScreen</Text>
+            <Text>BugDetailScreen</Text>
         </View>
     )
 }
 
-export default FixedScreen
+export default BugDetailScreen

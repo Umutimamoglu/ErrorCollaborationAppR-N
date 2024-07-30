@@ -22,11 +22,23 @@ export type AuthStackParamList = {
 export type RootBottomTabParamList = {
     HomeStack: NavigatorScreenParams<HomeStackParamlist>
     Today: undefined
-    Fixed: undefined
+    MyBugs: NavigatorScreenParams<BugsStackParamList>
 
     Feed: undefined
     Profile: undefined
     CategoriesStack: NavigatorScreenParams<CategoriesStackParamList>
+}
+
+
+export type BugsNavigationType =
+    NativeStackNavigationProp<BugsStackParamList>
+
+export type BugsStackParamList = {
+    Bugs: undefined
+    Bug: {
+        id: string
+    };
+
 }
 
 export type CategoriesStackParamList = {

@@ -8,11 +8,11 @@ import Icons from "../src/shared/icons";
 import ProfileScreen from "../screens/profile-screen";
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faUser, faSquareCheck } from '@fortawesome/free-solid-svg-icons';
-import FixedScreen from "../screens/FixedScreen";
 import { MaterialIcons } from '@expo/vector-icons';
 import { useTheme } from "@shopify/restyle";
 import React from "react";
 import HomeScreen from "../screens/home-screen";
+import BugsStackNavigator from "./bugs-stack-navigator";
 
 
 const Tab = createBottomTabNavigator<RootBottomTabParamList>()
@@ -33,7 +33,7 @@ const BottomTabNavigator = () => {
         >
             <Tab.Screen
                 name="HomeStack"
-                component={HomeScreen}
+                component={HomeStackNavigator}
                 options={() => ({
                     title: "Home",
                     tabBarIcon: ({ color }) => <Icons name="home" color={color} />,
@@ -43,7 +43,7 @@ const BottomTabNavigator = () => {
 
             <Tab.Screen
                 name="Feed"
-                component={FixedScreen}
+                component={BugsStackNavigator}
                 options={() => ({
                     title: "Feed",
                     tabBarIcon: ({ color, size }) => (
@@ -53,8 +53,8 @@ const BottomTabNavigator = () => {
                 })}
             />
             <Tab.Screen
-                name="Fixed"
-                component={FixedScreen}
+                name="MyBugs"
+                component={BugsStackNavigator}
                 options={() => ({
                     title: "Bugs",
                     tabBarIcon: ({ color }) => <MaterialIcons name="error-outline" size={24} color="black" />,
