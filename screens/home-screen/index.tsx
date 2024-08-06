@@ -11,11 +11,12 @@ import { RouteProp, useNavigation } from '@react-navigation/native';
 import { CreateError, ICreateErrorRequest, IColor } from '../../types';
 import { launchImageLibrary, launchCamera, ImagePickerResponse, CameraOptions, ImageLibraryOptions } from 'react-native-image-picker';
 import { getColors } from '../../utils/heplers';
-import { CategoriesStackParamList } from '../../navigation/types';
+import { AuthScreenNavigationType, CategoriesStackParamList, RootBottomTabParamList } from '../../navigation/types';
 import SearchableDropdown from 'react-native-searchable-dropdown';
 import axios from 'axios';
 import { MaterialIcons } from '@expo/vector-icons';
 import { check, request, PERMISSIONS, RESULTS } from 'react-native-permissions';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 const COLORS = getColors();
 const PROGRAMMING_LANGUAGES = [
@@ -35,6 +36,8 @@ const ERROR_TYPES = [
     { id: 6, name: 'Golden Hammer' },
     { id: 7, name: 'Analysis Paralysis' }
 ];
+
+
 
 const DEFAULT_COLOR = COLORS[0];
 const DEFAULT_LANGUAGE = PROGRAMMING_LANGUAGES[0];
@@ -68,6 +71,14 @@ type CreateErrorRouteTypes = RouteProp<
 >;
 
 function HomeScreen() {
+
+
+    const navigation = useNavigation<NativeStackNavigationProp<RootBottomTabParamList, "MyBugs">>();
+
+    const navigateToMyBugsScreen = () => {
+        navigation.navigate("MyBugs", { screen: 'Bugs' }); // Assuming you have a screen called 'Bugs' within the 'MyBugs' stack
+    };
+
     const [selectedLanguage, setSelectedLanguage] = useState('');
     const [selectedErrorType, setSelectedErrorType] = useState('');
     const [image, setImage] = useState<string>(''); // image değişkenini string olarak tanımlayın
@@ -112,6 +123,8 @@ function HomeScreen() {
 
             await trigger(formData);
             await mutate(BASE_URL + 'api/errors/create');
+
+            navigateToMyBugsScreen()
         } catch (error) {
 
             throw error;

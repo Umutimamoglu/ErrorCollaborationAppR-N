@@ -14,7 +14,7 @@ export const palette = {
     /**tailwind colors */
 
     slate50: "#f8fafc",
-    slate100: "#f1f5f9",
+    slate100: "#3F3C3C",
     slate200: "#e2e8f0",
     slate300: "#cbd5e1",
     slate400: "#94a3b8",
@@ -36,6 +36,7 @@ export const palette = {
     gray700: "#374151",
     gray800: "#1f2937",
     gray900: "#111827",
+
 
     // zinc
     zinc50: "#fafafa",

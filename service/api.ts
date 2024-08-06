@@ -2,9 +2,8 @@ import { IUser } from "../types";
 import axiosInstance, { BLOSSOM_TOKEN_NAME, saveToken } from "./config";
 
 import axios from 'axios';
+
 import { AxiosError } from 'axios';
-
-
 
 type RegisterUserTypes = {
     email: string;
@@ -43,6 +42,7 @@ type LoginUserTypes = {
     password: string;
 };
 
+
 export const loginUser = async ({ email, password }: LoginUserTypes) => {
     console.log("Login data:", { email, password });  // Log the email and password
     try {
@@ -51,7 +51,8 @@ export const loginUser = async ({ email, password }: LoginUserTypes) => {
             password,
         });
         const _token = response.data.token;
-        axiosInstance.defaults.headers.common["Authorization"] = _token;
+        await saveToken('blossom_user_token', _token);
+        axiosInstance.defaults.headers.common["Authorization"] = `Bearer ${_token}`;
         console.log("Login successful, token received:", _token);
         return response.data.user;
     } catch (error) {
