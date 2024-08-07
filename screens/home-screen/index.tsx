@@ -37,8 +37,6 @@ const ERROR_TYPES = [
     { id: 7, name: 'Analysis Paralysis' }
 ];
 
-
-
 const DEFAULT_COLOR = COLORS[0];
 const DEFAULT_LANGUAGE = PROGRAMMING_LANGUAGES[0];
 const DEFAULT_ERROR = ERROR_TYPES[0];
@@ -48,7 +46,6 @@ const CreateErrorRequest = async (
     { arg }: { arg: FormData }
 ) => {
     try {
-
         const response = await axiosInstance.post(url, arg, {
             headers: {
                 'Content-Type': 'multipart/form-data',
@@ -72,16 +69,15 @@ type CreateErrorRouteTypes = RouteProp<
 
 function HomeScreen() {
 
-
     const navigation = useNavigation<NativeStackNavigationProp<RootBottomTabParamList, "MyBugs">>();
 
     const navigateToMyBugsScreen = () => {
-        navigation.navigate("MyBugs", { screen: 'Bugs' }); // Assuming you have a screen called 'Bugs' within the 'MyBugs' stack
+        navigation.navigate("MyBugs", { screen: 'Bugs' });
     };
 
     const [selectedLanguage, setSelectedLanguage] = useState('');
     const [selectedErrorType, setSelectedErrorType] = useState('');
-    const [image, setImage] = useState<string>(''); // image değişkenini string olarak tanımlayın
+    const [image, setImage] = useState<string>('');
     const theme = useTheme<Theme>();
 
     const { trigger } = useSWRMutation(
@@ -96,7 +92,8 @@ function HomeScreen() {
         language: DEFAULT_LANGUAGE.name,
         isFixed: false,
         image: undefined,
-        type: DEFAULT_ERROR.name
+        type: DEFAULT_ERROR.name,
+        howDidIFix: "Bos"
     });
 
     const updateErrorType = (errorType: string | null | undefined) => {
@@ -113,6 +110,7 @@ function HomeScreen() {
             formData.append('isFixed', newError.isFixed.toString());
             formData.append('language', newError.language);
             formData.append('type', newError.type);
+            formData.append('howDidIFix', newError.howDidIFix);
             if (image) {
                 formData.append('image', {
                     uri: image,
@@ -124,9 +122,8 @@ function HomeScreen() {
             await trigger(formData);
             await mutate(BASE_URL + 'api/errors/create');
 
-            navigateToMyBugsScreen()
+            navigateToMyBugsScreen();
         } catch (error) {
-
             throw error;
         }
     };
@@ -200,6 +197,7 @@ function HomeScreen() {
             }
         });
     };
+
 
     return (
         <SafeAreaWrapper>

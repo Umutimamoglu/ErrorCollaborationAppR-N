@@ -1,11 +1,10 @@
-import { createNativeStackNavigator } from "@react-navigation/native-stack"
-import { BugsStackParamList } from "./types"
-import MyBugsScreen from "../screens/MyBugsScreen"
-import React from "react"
-import BugDetailScreen from "../screens/BugDetailScreen"
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { BugsStackParamList } from "./types";
+import MyBugsScreen from "../screens/MyBugsScreen";
+import React from "react";
+import BugDetailScreen from "../screens/BugDetailScreen";
 
-
-const Stack = createNativeStackNavigator<BugsStackParamList>()
+const Stack = createNativeStackNavigator<BugsStackParamList>();
 
 const BugsStackNavigator = () => {
     return (
@@ -17,18 +16,14 @@ const BugsStackNavigator = () => {
                     headerShown: false,
                 }} />
             <Stack.Screen
-                name="Bug"
+                name="BugDetail"
                 component={BugDetailScreen}
                 options={{
                     headerShown: false,
                 }}
             />
-
-
-
-
         </Stack.Navigator>
-    )
-}
+    );
+};
 
-export default BugsStackNavigator
+export default BugsStackNavigator;

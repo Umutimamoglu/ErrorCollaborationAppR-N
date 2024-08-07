@@ -5,7 +5,6 @@ import { useNavigation } from '@react-navigation/native';
 import { BugsNavigationType } from '../../navigation/types';
 import { Box, Text } from '../../utils/theme';
 
-
 type BugProps = {
     bug: IBug
 };
@@ -14,7 +13,7 @@ const Bug = ({ bug }: BugProps) => {
     const navigation = useNavigation<BugsNavigationType>();
 
     const navigateToBugDetailScreen = () => {
-        navigation.navigate("Bug", { id: bug._id })
+        navigation.navigate("BugDetail", { bug })
     }
 
     return (
@@ -35,11 +34,10 @@ const Bug = ({ bug }: BugProps) => {
                             {bug.name}
                         </Text>
                     </Box>
-
                 </Box>
             </Box>
         </Pressable>
     )
 }
 
-export default Bug
+export default Bug;

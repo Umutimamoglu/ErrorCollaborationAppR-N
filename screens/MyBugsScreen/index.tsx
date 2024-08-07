@@ -11,12 +11,16 @@ import NavigateBack from '../../src/shared/navigate-back';
 import AntDesign from '@expo/vector-icons/AntDesign';
 import FontAwesome5 from '@expo/vector-icons/FontAwesome';
 import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
-
 import Feather from '@expo/vector-icons/Feather';
+import { useNavigation } from '@react-navigation/native';
+import { BugsNavigationType } from '../../navigation/types';
+
 
 const MyBugsScreen = () => {
     const [isChecked, setIsChecked] = useState(false);
     const [searchQuery, setSearchQuery] = useState('');
+
+    const navigation = useNavigation<BugsNavigationType>(); // Type your navigation
 
     const { data, isLoading, error } = useSWR<IBug[]>(
         "api/errors/getMyErrors",
@@ -47,7 +51,9 @@ const MyBugsScreen = () => {
     );
 
     const renderItem = ({ item }: { item: IBug }) => (
-        <Bug bug={item} />
+        <Pressable onPress={() => navigation.navigate('BugDetail', { bug: item })}>
+            <Bug bug={item} />
+        </Pressable>
     );
 
     return (

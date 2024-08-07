@@ -7,7 +7,7 @@ import HomeStackNavigator from "./home-stack-navigator";
 import Icons from "../src/shared/icons";
 import ProfileScreen from "../screens/profile-screen";
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { faUser, faSquareCheck } from '@fortawesome/free-solid-svg-icons';
+import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { MaterialIcons } from '@expo/vector-icons';
 import { useTheme } from "@shopify/restyle";
 import React from "react";

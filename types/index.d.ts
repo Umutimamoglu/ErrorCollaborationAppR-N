@@ -35,6 +35,7 @@ export interface CreateError {
     image?: string;
     color: string;
     type: string; // 'type' artık zorunlu
+    howDidIFix: string;
 }
 
 export interface ICreateErrorRequest {
@@ -46,6 +47,7 @@ export interface ICreateErrorRequest {
     image?: string | null;
     color?: string;
     type: string;
+    howDidIFix?: string;
 }
 
 export interface IBug {
@@ -56,4 +58,5 @@ export interface IBug {
     image?: string;
     color: string;
     type: string; // 'type' artık zorunlu
+    howDidIFix?: string;
 }
