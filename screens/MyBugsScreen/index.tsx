@@ -1,5 +1,5 @@
 import { FlatList, Pressable, View, TextInput } from 'react-native';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import useSWR from 'swr';
 import { IBug } from '../../types';
 import { fetcher } from '../../service/config';
@@ -15,7 +15,6 @@ import Feather from '@expo/vector-icons/Feather';
 import { useNavigation } from '@react-navigation/native';
 import { BugsNavigationType } from '../../navigation/types';
 
-
 const MyBugsScreen = () => {
     const [isChecked, setIsChecked] = useState(false);
     const [searchQuery, setSearchQuery] = useState('');
@@ -27,6 +26,8 @@ const MyBugsScreen = () => {
         fetcher, {
         refreshInterval: 10000, // 10 saniye olarak değiştirildi
     });
+
+
 
     if (isLoading) {
         return <Loader />;
@@ -58,7 +59,7 @@ const MyBugsScreen = () => {
 
     return (
         <SafeAreaWraper>
-            <Box ml="2" flexDirection="row" alignItems="center">
+            <Box bg="zinc400" flexDirection="row" alignItems="center">
                 <NavigateBack />
                 <Pressable>
                     <Box ml="10" mt="3" width={140} height={40} borderRadius="rounded-5xl" bg="gray250" flexDirection="row" alignItems="center">
@@ -79,7 +80,8 @@ const MyBugsScreen = () => {
                 </Pressable>
             </Box>
 
-            <Box flexDirection="row" mt="4" mb="2" px="4" alignItems="center">
+            <Box bg="zinc400" width={600} height={15} />
+            <Box flexDirection="row" bg="zinc400" px="4" alignItems="center">
                 <FontAwesome5 name="search" size={20} color="gray" />
                 <TextInput
                     style={{
@@ -96,8 +98,8 @@ const MyBugsScreen = () => {
                     onChangeText={text => setSearchQuery(text)}
                 />
             </Box>
-
-            <Box flex={1} px="4" mt="5">
+            <Box bg="zinc400" width={600} height={30} />
+            <Box bg="zinc400" flex={1} >
                 <FlatList
                     data={filteredData}
                     showsVerticalScrollIndicator={false}

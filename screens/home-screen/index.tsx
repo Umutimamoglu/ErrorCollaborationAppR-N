@@ -88,7 +88,7 @@ function HomeScreen() {
     const { mutate } = useSWRConfig();
     const [newError, setNewError] = useState<CreateError>({
         name: '',
-        color: DEFAULT_COLOR.name,
+        color: DEFAULT_COLOR,  // burada sadece renk adını değil, tam nesneyi saklayın
         language: DEFAULT_LANGUAGE.name,
         isFixed: false,
         image: undefined,
@@ -106,7 +106,7 @@ function HomeScreen() {
         try {
             const formData = new FormData();
             formData.append('name', newError.name);
-            formData.append('color', newError.color);
+            formData.append('color', JSON.stringify(newError.color));  // color objesini JSON olarak ekleyin
             formData.append('isFixed', newError.isFixed.toString());
             formData.append('language', newError.language);
             formData.append('type', newError.type);
@@ -128,12 +128,14 @@ function HomeScreen() {
         }
     };
 
+
     const updateColor = (color: IColor) => {
         setNewError((prev) => ({
             ...prev,
-            color: color.name,
+            color,  // Tam nesneyi saklayın
         }));
     };
+
 
     const updateLanguage = (language: string) => {
         setNewError((prev) => ({
@@ -318,7 +320,7 @@ function HomeScreen() {
                             variant="textXs"
                             fontWeight="600"
 
-                            color={newError.color as keyof Theme['colors']}
+                            color={newError.color as unknown as keyof Theme['colors']}
                         >
                             Colors
                         </Text>

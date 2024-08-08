@@ -1,5 +1,5 @@
-import React from 'react';
-import { Pressable, View } from 'react-native';
+import React, { useEffect } from 'react';
+import { Pressable, View, StyleSheet } from 'react-native';
 import { IBug } from '../../types';
 import { useNavigation } from '@react-navigation/native';
 import { BugsNavigationType } from '../../navigation/types';
@@ -12,13 +12,17 @@ type BugProps = {
 const Bug = ({ bug }: BugProps) => {
     const navigation = useNavigation<BugsNavigationType>();
 
+    useEffect(() => {
+        console.log("Bug details:", bug); // Rengi loga yazdırma
+    }, [bug]);
+
     const navigateToBugDetailScreen = () => {
-        navigation.navigate("BugDetail", { bug })
+        navigation.navigate("BugDetail", { bug });
     }
 
     return (
         <Pressable onPress={navigateToBugDetailScreen}>
-            <Box bg="zinc400" p="4" borderRadius="rounded-4xl">
+            <Box style={[styles.box, { backgroundColor: bug.color.code }]}>
                 <Box flexDirection="row"
                     alignItems="center"
                     justifyContent="space-between"
@@ -39,5 +43,12 @@ const Bug = ({ bug }: BugProps) => {
         </Pressable>
     )
 }
+
+const styles = StyleSheet.create({
+    box: {
+        padding: 16,
+        borderRadius: 16,
+    },
+});
 
 export default Bug;
