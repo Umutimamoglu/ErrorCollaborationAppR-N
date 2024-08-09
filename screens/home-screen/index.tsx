@@ -85,10 +85,14 @@ function HomeScreen() {
         CreateErrorRequest
     );
 
+
+    const color: IColor = DEFAULT_COLOR; // Doğrudan tüm nesneyi atıyorsunuz
+
+
     const { mutate } = useSWRConfig();
     const [newError, setNewError] = useState<CreateError>({
         name: '',
-        color: DEFAULT_COLOR,  // burada sadece renk adını değil, tam nesneyi saklayın
+        color,
         language: DEFAULT_LANGUAGE.name,
         isFixed: false,
         image: undefined,
@@ -106,11 +110,18 @@ function HomeScreen() {
         try {
             const formData = new FormData();
             formData.append('name', newError.name);
-            formData.append('color', JSON.stringify(newError.color));  // color objesini JSON olarak ekleyin
+
+            // Color bilgisini JSON string'e çevirmek yerine, 
+            // ayrı alanlar olarak gönderiyoruz
+            formData.append('color[id]', color.id);
+            formData.append('color[name]', color.name);
+            formData.append('color[code]', color.code);
+
             formData.append('isFixed', newError.isFixed.toString());
             formData.append('language', newError.language);
             formData.append('type', newError.type);
             formData.append('howDidIFix', newError.howDidIFix);
+
             if (image) {
                 formData.append('image', {
                     uri: image,
@@ -129,13 +140,17 @@ function HomeScreen() {
     };
 
 
-    const updateColor = (color: IColor) => {
-        setNewError((prev) => ({
-            ...prev,
-            color,  // Tam nesneyi saklayın
-        }));
-    };
+    console.log('Selected Color:', newError.color);
 
+
+    const updateColor = (color: IColor) => {
+        setNewError((prev) => {
+            return {
+                ...prev,
+                color
+            }
+        })
+    }
 
     const updateLanguage = (language: string) => {
         setNewError((prev) => ({
@@ -199,7 +214,6 @@ function HomeScreen() {
             }
         });
     };
-
 
     return (
         <SafeAreaWrapper>
@@ -309,7 +323,9 @@ function HomeScreen() {
                 </Box>
                 <Box bg="gray250" p="4" borderRadius="rounded-2xl" mb="4">
                     <Box
-                        bg="white"
+                        style={{
+                            backgroundColor: newError.color?.code,
+                        }}
                         width={60}
                         p="2"
                         mb="4"
@@ -319,8 +335,7 @@ function HomeScreen() {
                         <Text
                             variant="textXs"
                             fontWeight="600"
-
-                            color={newError.color as unknown as keyof Theme['colors']}
+                            style={{ color: "#ffff" }}
                         >
                             Colors
                         </Text>

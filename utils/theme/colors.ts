@@ -72,7 +72,10 @@ export const palette = {
     red200: "#fecaca",
     red300: "#fca5a5",
     red400: "#f87171",
-    red500: "#F34147",
+    red500: "#ef4444",
+
+
+
     red600: "#dc2626",
     red700: "#b91c1c",
     red800: "#991b1b",
@@ -281,7 +284,8 @@ export const colors = {
     red200: palette.red200,
     red300: palette.red300,
     red400: palette.red400,
-    red500: palette.red500,
+
+
     red600: palette.red600,
     red700: palette.red700,
     red800: palette.red800,
@@ -294,6 +298,9 @@ export const colors = {
     amber700: palette.amber700,
     amber800: palette.amber800,
     amber900: palette.amber900,
+
+
+    red500: palette.red500,
 
     // Green
     green50: palette.green50,

@@ -33,11 +33,7 @@ export interface CreateError {
     isFixed: boolean;
     language: string;
     image?: string;
-    color: {
-        id: string;
-        name: string;
-        code: string;
-    };
+    color?: IColor;
     type: string; // 'type' artık zorunlu
     howDidIFix: string;
 }
@@ -49,7 +45,7 @@ export interface ICreateErrorRequest {
     isFixed: boolean;
     language: string;
     image?: string | null;
-    color?: string;
+    color?: IColor;
     type: string;
     howDidIFix?: string;
 }
@@ -60,11 +56,7 @@ export interface IBug {
     isFixed: boolean;
     language: string;
     image?: string;
-    color: {
-        id: string;
-        name: string;
-        code: string;
-    };
+    color: IColor;
     type: string; // 'type' artık zorunlu
     howDidIFix?: string;
 }
