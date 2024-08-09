@@ -13,6 +13,7 @@ import { useTheme } from "@shopify/restyle";
 import React from "react";
 import HomeScreen from "../screens/home-screen";
 import BugsStackNavigator from "./bugs-stack-navigator";
+import FeedScreen from "../screens/FeedScreen";
 
 
 const Tab = createBottomTabNavigator<RootBottomTabParamList>()
@@ -43,7 +44,7 @@ const BottomTabNavigator = () => {
 
             <Tab.Screen
                 name="Feed"
-                component={BugsStackNavigator}
+                component={FeedScreen}
                 options={() => ({
                     title: "Feed",
                     tabBarIcon: ({ color, size }) => (

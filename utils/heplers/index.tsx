@@ -3,11 +3,12 @@ import { nanoid } from "nanoid/non-secure"
 import { IColor, IIcon } from "../../types"
 
 const palette = {
+    green500: "#22c55e",
     red500: "#ef4444",
     red600: "#dc2626",
     orange300: "#fdba74",
     orange400: "#fb923c",
-    green500: "#22c55e",
+
     green600: "#16a34a",
     sky400: "#38bdf8",
     sky500: "#0ea5e9",

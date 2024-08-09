@@ -19,12 +19,12 @@ const Bug = ({ bug }: BugProps) => {
 
     return (
         <Pressable onPress={navigateToBugDetailScreen}>
-            <Box style={{ backgroundColor: bug.color.code, padding: 16, borderRadius: 16 }}>
+            <Box style={{ backgroundColor: bug.color.code, padding: 13, borderRadius: 16 }}>
                 <Box flexDirection="row"
                     alignItems="center"
                     justifyContent="space-between"
                 >
-                    <Box flexDirection="row" style={{ padding: 8 }}>
+                    <Box flexDirection="row" style={{ padding: 1 }}>
                         <Text variant="textBase" fontWeight="600" mr="3">
                             {bug.language}
                         </Text>

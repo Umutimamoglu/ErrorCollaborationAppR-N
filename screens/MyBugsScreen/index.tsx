@@ -100,13 +100,17 @@ const MyBugsScreen = () => {
             </Box>
             <Box bg="zinc400" width={600} height={30} />
             <Box bg="zinc400" flex={1} >
-                <FlatList
-                    data={filteredData}
-                    showsVerticalScrollIndicator={false}
-                    renderItem={renderItem}
-                    ItemSeparatorComponent={() => <Box height={14} />}
-                    keyExtractor={(item) => item._id}
-                />
+                <Box ml="5" mr="5">
+
+
+                    <FlatList
+                        data={filteredData}
+                        showsVerticalScrollIndicator={false}
+                        renderItem={renderItem}
+                        ItemSeparatorComponent={() => <Box height={14} />}
+                        keyExtractor={(item) => item._id}
+                    />
+                </Box>
             </Box>
         </SafeAreaWraper>
     );

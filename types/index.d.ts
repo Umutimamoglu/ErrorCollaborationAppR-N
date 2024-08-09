@@ -57,6 +57,21 @@ export interface IBug {
     language: string;
     image?: string;
     color: IColor;
-    type: string; // 'type' artık zorunlu
+    type: string;
     howDidIFix?: string;
+}
+
+export interface IAllBugs {
+    createdAt: string | number | Date
+    _id: string
+    user: IUser;
+    name: string;
+    isFixed: boolean;
+    language: string;
+    image?: string;
+    color: IColor;
+    type: string;
+    howDidIFix?: string;
+    Date: Date;
+    Time: Time;
 }

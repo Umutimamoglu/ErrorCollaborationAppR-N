@@ -111,11 +111,10 @@ function HomeScreen() {
             const formData = new FormData();
             formData.append('name', newError.name);
 
-            // Color bilgisini JSON string'e çevirmek yerine, 
-            // ayrı alanlar olarak gönderiyoruz
-            formData.append('color[id]', color.id);
-            formData.append('color[name]', color.name);
-            formData.append('color[code]', color.code);
+
+            formData.append('color[id]', newError.color?.id || DEFAULT_COLOR.id);
+            formData.append('color[name]', newError.color?.name || DEFAULT_COLOR.name);
+            formData.append('color[code]', newError.color?.code || DEFAULT_COLOR.code);
 
             formData.append('isFixed', newError.isFixed.toString());
             formData.append('language', newError.language);
@@ -143,14 +142,12 @@ function HomeScreen() {
     console.log('Selected Color:', newError.color);
 
 
-    const updateColor = (color: IColor) => {
-        setNewError((prev) => {
-            return {
-                ...prev,
-                color
-            }
-        })
-    }
+    const updateColor = (selectedColor: IColor) => {
+        setNewError((prev) => ({
+            ...prev,
+            color: selectedColor,
+        }));
+    };
 
     const updateLanguage = (language: string) => {
         setNewError((prev) => ({
@@ -340,6 +337,7 @@ function HomeScreen() {
                             Colors
                         </Text>
                     </Box>
+
                     <Box flexDirection="row" justifyContent="space-evenly">
                         {COLORS.map((_color: IColor) => (
                             <Pressable
@@ -351,6 +349,8 @@ function HomeScreen() {
                                 <Box
                                     style={{
                                         backgroundColor: _color.code,
+                                        borderColor: newError.color?.id === _color.id ? 'black' : 'transparent',
+                                        borderWidth: 2,
                                     }}
                                     width={24}
                                     height={24}

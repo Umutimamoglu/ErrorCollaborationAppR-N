@@ -8,11 +8,15 @@ import Button from '../../src/shared/button';
 
 type BugDetailRouteProp = RouteProp<BugsStackParamList, 'BugDetail'>;
 
-const BASE_URL = 'http://192.168.1.103:1337/'; // Sunucunuzun base URL'sini buraya girin
+const BASE_URL = 'http://192.168.1.102:1337/';
+
 
 const BugDetailScreen = () => {
     const route = useRoute<BugDetailRouteProp>();
     const { bug } = route.params;
+
+
+    console.log('Gelen resim dosya yolu:', bug.image ? `${BASE_URL}${bug.image}` : 'Resim bulunamadı');
 
     return (
         <SafeAreaWrapper>
@@ -25,7 +29,7 @@ const BugDetailScreen = () => {
                         <Image
                             source={{ uri: `${BASE_URL}${bug.image}` }}
                             style={styles.image}
-                            onError={() => console.warn('Could not load image, using default')}
+                            onError={() => console.warn('Resim yüklenemedi, varsayılan kullanılacak')}
                         />
                     </Box>
                 ) : (
@@ -62,7 +66,7 @@ const BugDetailScreen = () => {
                 <Box mb="1" alignItems='center'>
                     <Button
                         label="Geri"
-                        onPress={() => { }}
+                        onPress={() => { /* Geri butonu işlemi buraya */ }}
                     />
                 </Box>
             </Box>
