@@ -1,46 +1,30 @@
-import { Image, StyleSheet, TextInput } from 'react-native';
-import React, { useState } from 'react';
+import { Image, StyleSheet } from 'react-native';
+import React from 'react';
 import { useRoute, RouteProp } from '@react-navigation/native';
 import { BugsStackParamList } from '../../navigation/types';
 import { Box, Text } from '../../utils/theme';
 import SafeAreaWrapper from '../../src/shared/safe-area-wrapper';
 import Button from '../../src/shared/button';
-import axiosInstance from '../../service/config';
+
 
 type BugDetailRouteProp = RouteProp<BugsStackParamList, 'BugDetail'>;
 
 const BASE_URL = 'http://192.168.1.102:1337/';
 
-const BugDetailScreen = () => {
+
+const AllBugDetail = () => {
     const route = useRoute<BugDetailRouteProp>();
     const { bug } = route.params;
 
-    const [name, setName] = useState(bug.name);
-    const [howDidIFix, setHowDidIFix] = useState(bug.howDidIFix);
-    const [isFixed, setIsFixed] = useState(bug.isFixed);
 
-    const updateBug = async () => {
-        try {
-            const response = await axiosInstance.put(`/api/errors/updateError/${bug._id}`, {
-                name,
-                howDidIFix,
-                isFixed
-            });
-            if (response.status === 200) {
-                console.log('Bug updated successfully');
-                // Güncelleme işleminden sonra gerekli durum güncellemelerini yapabilirsiniz
-            } else {
-                console.error('Failed to update bug');
-            }
-        } catch (error) {
-            console.error('Error while updating bug:', error);
-        }
-    };
+    console.log('Gelen resim dosya yolu:', bug.image ? `${BASE_URL}${bug.image}` : 'Resim bulunamadı');
 
     return (
         <SafeAreaWrapper>
             <Box bg="zinc400" flex={1}>
-                <Box flex={1} mx="6" justifyContent="center">
+                <Box flex={1} mx="1" >
+
+
                     <Text variant="textXl" textAlign="center" mb="4">
                         Hata Detayları
                     </Text>
@@ -57,48 +41,56 @@ const BugDetailScreen = () => {
                             <Text>Resim Bulunamadı</Text>
                         </Box>
                     )}
-                    <Box bg="gray250" borderRadius="rounded-2xl" mb="4">
-                        <TextInput
-                            value={name}
-                            onChangeText={setName}
+                    <Box ml='5' mr="5" bg="gray250" borderRadius="rounded-2xl" mb="4">
+                        <Text
                             style={{
                                 fontSize: 15,
                                 lineHeight: 19,
                                 padding: 12,
                             }}
-                        />
+                        >
+                            {bug.language}
+                        </Text>
                     </Box>
-                    <Box bg="gray250" borderRadius="rounded-2xl" mb="4">
-                        <TextInput
-                            value={howDidIFix}
-                            onChangeText={setHowDidIFix}
-                            multiline={true}
+                    <Box ml='5' mr="5" bg="gray250" borderRadius="rounded-2xl" mb="4">
+                        <Text
                             style={{
                                 fontSize: 15,
                                 lineHeight: 19,
                                 padding: 12,
+                                alignSelf: 'flex-start',  // Bu satırı ekledim
                             }}
-                        />
+                        >
+                            {bug.name}
+                        </Text>
                     </Box>
-                    <Box flexDirection="row" alignItems="center" mb="4">
-                        <Text mr="3">is-Fixed:</Text>
-                        <TextInput
-                            value={isFixed ? "Evet" : "Hayır"}
-                            onChangeText={(text) => setIsFixed(text.toLowerCase() === 'evet')}
+                    <Box ml='5' mr="5" bg="gray250" borderRadius="rounded-2xl" mb="4">
+                        <Text
                             style={{
                                 fontSize: 15,
                                 lineHeight: 19,
                                 padding: 12,
-                                width: 60, // Bu genişliği ihtiyacınıza göre ayarlayabilirsiniz
+                                alignSelf: 'flex-start',  // Bu satırı ekledim
                             }}
-                        />
+                        >
+                            {bug.howDidIFix}
+                        </Text>
                     </Box>
-                    <Box mb="1" alignItems='center'>
+
+                    <Box mt="14" alignItems='center'>
                         <Button
-                            label="Güncelle"
-                            onPress={updateBug} // `onPress` doğrudan fonksiyonu çağırmalı
+                            label="Mesaj Gonder"
+                            onPress={() => { /* Geri butonu işlemi buraya */ }}
                         />
                     </Box>
+                    <Box mt="5" alignItems='center'>
+                        <Button
+                            label="Listeme Ekle"
+                            onPress={() => { /* Geri butonu işlemi buraya */ }}
+                        />
+                    </Box>
+
+
                 </Box>
             </Box>
         </SafeAreaWrapper>
@@ -113,4 +105,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default BugDetailScreen;
+export default AllBugDetail;

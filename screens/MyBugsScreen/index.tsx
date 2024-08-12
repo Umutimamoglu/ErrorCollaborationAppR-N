@@ -7,7 +7,6 @@ import Loader from '../../src/shared/loader';
 import Bug from '../../src/components/bug';
 import SafeAreaWraper from '../../src/shared/safe-area-wrapper';
 import { Box, Text } from '../../utils/theme';
-import NavigateBack from '../../src/shared/navigate-back';
 import AntDesign from '@expo/vector-icons/AntDesign';
 import FontAwesome5 from '@expo/vector-icons/FontAwesome';
 import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
@@ -60,7 +59,7 @@ const MyBugsScreen = () => {
     return (
         <SafeAreaWraper>
             <Box bg="zinc400" flexDirection="row" alignItems="center">
-                <NavigateBack />
+
                 <Pressable>
                     <Box ml="10" mt="3" width={140} height={40} borderRadius="rounded-5xl" bg="gray250" flexDirection="row" alignItems="center">
                         <Box m="2" ml="6" flexDirection="row" alignItems="center">

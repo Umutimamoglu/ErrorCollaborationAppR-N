@@ -139,7 +139,7 @@ function HomeScreen() {
     };
 
 
-    console.log('Selected Color:', newError.color);
+
 
 
     const updateColor = (selectedColor: IColor) => {
@@ -214,160 +214,162 @@ function HomeScreen() {
 
     return (
         <SafeAreaWrapper>
-            <Box flex={1} mx="6" justifyContent="center">
-                <Text variant="textXl" textAlign="center" mb="4">
-                    Yeni hata oluştur!!!
-                </Text>
-                <Box alignItems="center" mb="2">
-                    <Pressable onPress={selectImageFromLibrary} style={styles.pressable}>
-                        <MaterialIcons name="photo-library" size={24} color="black" />
-                        <Text>Galeri</Text>
-                    </Pressable>
+            <Box flex={1} bg="zinc400">
+                <Box flex={1} mx="6" justifyContent="center">
+                    <Text variant="textXl" textAlign="center" mb="4">
+                        Yeni hata oluştur!!!
+                    </Text>
+                    <Box alignItems="center" mb="2">
+                        <Pressable onPress={selectImageFromLibrary} style={styles.pressable}>
+                            <MaterialIcons name="photo-library" size={24} color="black" />
+                            <Text>Galeri</Text>
+                        </Pressable>
 
-                </Box>
-                <Box bg="gray250" borderRadius="rounded-2xl" mb="4">
-                    <SearchableDropdown
-                        onItemSelect={(item) => {
-                            setSelectedLanguage(item.name);
-                            updateLanguage(item.name);
-                        }}
-                        containerStyle={{ padding: 5 }}
-                        textInputStyle={{
-                            fontSize: 15,
-                            lineHeight: 18,
-                            padding: 12,
-                            borderWidth: 1,
-                            borderColor: 'gray.500',
-                            backgroundColor: '#FAF7F6',
-                        }}
-                        itemStyle={{
-                            padding: 10,
-                            marginTop: 2,
-                            backgroundColor: '#FAF9F8',
-                            borderColor: 'gray.500',
-                            borderWidth: 1,
-                        }}
-                        itemTextStyle={{
-                            color: 'blue.800',
-                        }}
-                        itemsContainerStyle={{ maxHeight: 140 }}
-                        items={PROGRAMMING_LANGUAGES}
-                        defaultIndex={0}
-                        placeholder="Yazılım dili seçin"
-                        resetValue={false}
-                        underlineColorAndroid="transparent"
-                        textInputProps={{
-                            value: selectedLanguage
-                        }}
-                    />
-                </Box>
-                <Box p="1" />
-                <Box bg="gray250" borderRadius="rounded-2xl" mb="4">
-                    <SearchableDropdown
-                        onItemSelect={(item) => {
-                            setSelectedErrorType(item.name);
-                            updateErrorType(item.name);
-                        }}
-                        containerStyle={{ padding: 5 }}
-                        textInputStyle={{
-                            fontSize: 15,
-                            lineHeight: 18,
-                            padding: 12,
-                            borderWidth: 1,
-                            borderColor: 'gray.500',
-                            backgroundColor: '#FAF7F6',
-                        }}
-                        itemStyle={{
-                            padding: 10,
-                            marginTop: 2,
-                            backgroundColor: '#FAF9F8',
-                            borderColor: 'gray.500',
-                            borderWidth: 1,
-                        }}
-                        itemTextStyle={{
-                            color: 'blue.800',
-                        }}
-                        itemsContainerStyle={{ maxHeight: 140 }}
-                        items={ERROR_TYPES}
-                        defaultIndex={0}
-                        placeholder="Hata tipini seçiniz"
-                        resetValue={false}
-                        underlineColorAndroid="transparent"
-                        textInputProps={{
-                            value: selectedErrorType
-                        }}
-                    />
-                </Box>
+                    </Box>
+                    <Box bg="gray250" borderRadius="rounded-2xl" mb="4">
+                        <SearchableDropdown
+                            onItemSelect={(item) => {
+                                setSelectedLanguage(item.name);
+                                updateLanguage(item.name);
+                            }}
+                            containerStyle={{ padding: 5 }}
+                            textInputStyle={{
+                                fontSize: 15,
+                                lineHeight: 18,
+                                padding: 12,
+                                borderWidth: 1,
+                                borderColor: 'gray.500',
+                                backgroundColor: '#FAF7F6',
+                            }}
+                            itemStyle={{
+                                padding: 10,
+                                marginTop: 2,
+                                backgroundColor: '#FAF9F8',
+                                borderColor: 'gray.500',
+                                borderWidth: 1,
+                            }}
+                            itemTextStyle={{
+                                color: 'blue.800',
+                            }}
+                            itemsContainerStyle={{ maxHeight: 140 }}
+                            items={PROGRAMMING_LANGUAGES}
+                            defaultIndex={0}
+                            placeholder="Yazılım dili seçin"
+                            resetValue={false}
+                            underlineColorAndroid="transparent"
+                            textInputProps={{
+                                value: selectedLanguage
+                            }}
+                        />
+                    </Box>
+                    <Box p="1" />
+                    <Box bg="gray250" borderRadius="rounded-2xl" mb="4">
+                        <SearchableDropdown
+                            onItemSelect={(item) => {
+                                setSelectedErrorType(item.name);
+                                updateErrorType(item.name);
+                            }}
+                            containerStyle={{ padding: 5 }}
+                            textInputStyle={{
+                                fontSize: 15,
+                                lineHeight: 18,
+                                padding: 12,
+                                borderWidth: 1,
+                                borderColor: 'gray.500',
+                                backgroundColor: '#FAF7F6',
+                            }}
+                            itemStyle={{
+                                padding: 10,
+                                marginTop: 2,
+                                backgroundColor: '#FAF9F8',
+                                borderColor: 'gray.500',
+                                borderWidth: 1,
+                            }}
+                            itemTextStyle={{
+                                color: 'blue.800',
+                            }}
+                            itemsContainerStyle={{ maxHeight: 140 }}
+                            items={ERROR_TYPES}
+                            defaultIndex={0}
+                            placeholder="Hata tipini seçiniz"
+                            resetValue={false}
+                            underlineColorAndroid="transparent"
+                            textInputProps={{
+                                value: selectedErrorType
+                            }}
+                        />
+                    </Box>
 
-                <Box bg="gray250" borderRadius="rounded-2xl" mb="4">
-                    <TextInput
-                        style={{
-                            fontSize: 15,
-                            lineHeight: 19,
-                            padding: 12,
-                        }}
-                        value={newError.name}
-                        maxLength={36}
-                        placeholder="Hatanıza isim verin"
-                        placeholderTextColor={theme.colors.gray5}
-                        onChangeText={(text) => {
-                            setNewError((prev) => ({
-                                ...prev,
-                                name: text,
-                            }));
-                        }}
-                    />
-                </Box>
-                <Box bg="gray250" p="4" borderRadius="rounded-2xl" mb="4">
-                    <Box
-                        style={{
-                            backgroundColor: newError.color?.code,
-                        }}
-                        width={60}
-                        p="2"
-                        mb="4"
-                        borderRadius="rounded-2xl"
-                        alignItems="center"
-                    >
-                        <Text
-                            variant="textXs"
-                            fontWeight="600"
-                            style={{ color: "#ffff" }}
+                    <Box bg="gray250" borderRadius="rounded-2xl" mb="4">
+                        <TextInput
+                            style={{
+                                fontSize: 15,
+                                lineHeight: 19,
+                                padding: 12,
+                            }}
+                            value={newError.name}
+                            maxLength={36}
+                            placeholder="Hatanıza isim verin"
+                            placeholderTextColor={theme.colors.gray5}
+                            onChangeText={(text) => {
+                                setNewError((prev) => ({
+                                    ...prev,
+                                    name: text,
+                                }));
+                            }}
+                        />
+                    </Box>
+                    <Box bg="gray250" p="4" borderRadius="rounded-2xl" mb="4">
+                        <Box
+                            style={{
+                                backgroundColor: newError.color?.code,
+                            }}
+                            width={60}
+                            p="2"
+                            mb="4"
+                            borderRadius="rounded-2xl"
+                            alignItems="center"
                         >
-                            Colors
-                        </Text>
-                    </Box>
-
-                    <Box flexDirection="row" justifyContent="space-evenly">
-                        {COLORS.map((_color: IColor) => (
-                            <Pressable
-                                key={_color.id}
-                                onPress={() => {
-                                    updateColor(_color);
-                                }}
+                            <Text
+                                variant="textXs"
+                                fontWeight="600"
+                                style={{ color: "#ffff" }}
                             >
-                                <Box
-                                    style={{
-                                        backgroundColor: _color.code,
-                                        borderColor: newError.color?.id === _color.id ? 'black' : 'transparent',
-                                        borderWidth: 2,
-                                    }}
-                                    width={24}
-                                    height={24}
-                                    borderRadius="rounded-2xl"
-                                ></Box>
-                            </Pressable>
-                        ))}
-                    </Box>
-                </Box>
-                <Box mb="1" alignItems='center'>
-                    <Button
-                        label="Hata Ekle"
-                        onPress={() => {
+                                Colors
+                            </Text>
+                        </Box>
 
-                            createNewError();
-                        }}
-                    />
+                        <Box flexDirection="row" justifyContent="space-evenly">
+                            {COLORS.map((_color: IColor) => (
+                                <Pressable
+                                    key={_color.id}
+                                    onPress={() => {
+                                        updateColor(_color);
+                                    }}
+                                >
+                                    <Box
+                                        style={{
+                                            backgroundColor: _color.code,
+                                            borderColor: newError.color?.id === _color.id ? 'black' : 'transparent',
+                                            borderWidth: 2,
+                                        }}
+                                        width={24}
+                                        height={24}
+                                        borderRadius="rounded-2xl"
+                                    ></Box>
+                                </Pressable>
+                            ))}
+                        </Box>
+                    </Box>
+                    <Box mb="1" alignItems='center'>
+                        <Button
+                            label="Hata Ekle"
+                            onPress={() => {
+
+                                createNewError();
+                            }}
+                        />
+                    </Box>
                 </Box>
             </Box>
         </SafeAreaWrapper>

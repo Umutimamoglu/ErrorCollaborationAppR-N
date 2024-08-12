@@ -3,6 +3,7 @@ import { BugsStackParamList } from "./types";
 import MyBugsScreen from "../screens/MyBugsScreen";
 import React from "react";
 import BugDetailScreen from "../screens/BugDetailScreen";
+import AllBugDetail from "../screens/AllBugDetail";
 
 const Stack = createNativeStackNavigator<BugsStackParamList>();
 
@@ -18,6 +19,13 @@ const BugsStackNavigator = () => {
             <Stack.Screen
                 name="BugDetail"
                 component={BugDetailScreen}
+                options={{
+                    headerShown: false,
+                }}
+            />
+            <Stack.Screen
+                name="AllBugDetail"
+                component={AllBugDetail}
                 options={{
                     headerShown: false,
                 }}

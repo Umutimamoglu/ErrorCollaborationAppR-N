@@ -45,7 +45,7 @@ const FeedScreen = () => {
     return (
         <SafeAreaWraper>
             <Box bg="zinc400" flex={1}>
-                <Text variant="textLg" textAlign='center' mt="10" mb="12">
+                <Text variant="textLg" textAlign='center' mt="10" mb="4">
                     Hata Akış
                 </Text>
 
@@ -57,6 +57,7 @@ const FeedScreen = () => {
                             flex: 1,
                             height: 40,
                             borderColor: 'gray',
+                            backgroundColor: "white",
                             borderWidth: 1,
                             borderRadius: 10,
                             marginLeft: 10,

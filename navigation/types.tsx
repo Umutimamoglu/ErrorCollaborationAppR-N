@@ -33,6 +33,9 @@ export type BugsStackParamList = {
     BugDetail: {
         bug: IBug;
     };
+    AllBugDetail: {
+        bug: IBug;
+    }
 };
 
 export type CategoriesStackParamList = {
