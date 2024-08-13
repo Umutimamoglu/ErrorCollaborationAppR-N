@@ -1,5 +1,5 @@
-import { Image, StyleSheet, TextInput } from 'react-native';
-import React, { useState } from 'react';
+import { Image, StyleSheet, Pressable, TextInput } from 'react-native';
+import React, { useState, useEffect } from 'react';
 import { useRoute, RouteProp } from '@react-navigation/native';
 import { BugsStackParamList } from '../../navigation/types';
 import { Box, Text } from '../../utils/theme';
@@ -28,7 +28,6 @@ const BugDetailScreen = () => {
             });
             if (response.status === 200) {
                 console.log('Bug updated successfully');
-                // Güncelleme işleminden sonra gerekli durum güncellemelerini yapabilirsiniz
             } else {
                 console.error('Failed to update bug');
             }
@@ -36,6 +35,12 @@ const BugDetailScreen = () => {
             console.error('Error while updating bug:', error);
         }
     };
+
+    const toggleIsFixed = () => {
+        setIsFixed(!isFixed);
+
+    };
+
 
     return (
         <SafeAreaWrapper>
@@ -82,21 +87,21 @@ const BugDetailScreen = () => {
                     </Box>
                     <Box flexDirection="row" alignItems="center" mb="4">
                         <Text mr="3">is-Fixed:</Text>
-                        <TextInput
-                            value={isFixed ? "Evet" : "Hayır"}
-                            onChangeText={(text) => setIsFixed(text.toLowerCase() === 'evet')}
-                            style={{
-                                fontSize: 15,
-                                lineHeight: 19,
-                                padding: 12,
-                                width: 60, // Bu genişliği ihtiyacınıza göre ayarlayabilirsiniz
-                            }}
-                        />
+                        <Pressable onPress={toggleIsFixed}>
+                            <Box
+                                bg={isFixed ? "green400" : "red400"}
+                                px="3"
+                                py="2"
+                                borderRadius="rounded-4xl"
+                            >
+                                <Text color="white">{isFixed ? "Evet" : "Hayır"}</Text>
+                            </Box>
+                        </Pressable>
                     </Box>
                     <Box mb="1" alignItems='center'>
                         <Button
                             label="Güncelle"
-                            onPress={updateBug} // `onPress` doğrudan fonksiyonu çağırmalı
+                            onPress={updateBug}
                         />
                     </Box>
                 </Box>

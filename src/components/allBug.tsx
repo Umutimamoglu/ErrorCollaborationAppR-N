@@ -2,7 +2,7 @@ import React from 'react';
 import { Pressable, View } from 'react-native';
 import { IAllBugs } from '../../types';
 import { useNavigation } from '@react-navigation/native';
-import { BugsNavigationType } from '../../navigation/types';
+import { AllBugsNavigationType } from '../../navigation/types';
 import { Box, Text } from '../../utils/theme';
 
 type BugProps = {
@@ -10,7 +10,7 @@ type BugProps = {
 };
 
 const AllBug = ({ bug }: BugProps) => {
-    const navigation = useNavigation<BugsNavigationType>();
+    const navigation = useNavigation<AllBugsNavigationType>();
 
     const navigateToBugDetailScreen = () => {
         navigation.navigate("AllBugDetail", { bug });

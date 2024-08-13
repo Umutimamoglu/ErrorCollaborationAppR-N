@@ -39,7 +39,7 @@ const FeedScreen = () => {
     );
 
     const renderItem = ({ item }: { item: IAllBugs }) => (
-        <AllBug bug={item} />  // allBug bileşenini JSX'te bu şekilde kullanın
+        <AllBug bug={item} />
     );
 
     return (
@@ -74,7 +74,7 @@ const FeedScreen = () => {
                         data={filteredData}
                         renderItem={renderItem}
                         keyExtractor={(item) => item._id}
-                        ItemSeparatorComponent={() => <Box height={14} />} // Her öğe arasına boşluk eklemek için
+                        ItemSeparatorComponent={() => <Box height={14} />}
                     />
                 </Box>
             </Box>

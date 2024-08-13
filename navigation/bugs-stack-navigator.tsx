@@ -23,13 +23,7 @@ const BugsStackNavigator = () => {
                     headerShown: false,
                 }}
             />
-            <Stack.Screen
-                name="AllBugDetail"
-                component={AllBugDetail}
-                options={{
-                    headerShown: false,
-                }}
-            />
+
         </Stack.Navigator>
     );
 };

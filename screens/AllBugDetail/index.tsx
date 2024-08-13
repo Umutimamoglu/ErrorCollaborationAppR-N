@@ -1,30 +1,31 @@
-import { Image, StyleSheet } from 'react-native';
 import React from 'react';
-import { useRoute, RouteProp } from '@react-navigation/native';
-import { BugsStackParamList } from '../../navigation/types';
+import { Image, StyleSheet } from 'react-native';
+import { useRoute, RouteProp, useNavigation } from '@react-navigation/native';
+import { AllBugsNavigationType, AllBugsStackParamList } from '../../navigation/types';
 import { Box, Text } from '../../utils/theme';
 import SafeAreaWrapper from '../../src/shared/safe-area-wrapper';
 import Button from '../../src/shared/button';
 
-
-type BugDetailRouteProp = RouteProp<BugsStackParamList, 'BugDetail'>;
+type BugDetailRouteProp = RouteProp<AllBugsStackParamList, 'AllBugDetail'>;
 
 const BASE_URL = 'http://192.168.1.102:1337/';
-
 
 const AllBugDetail = () => {
     const route = useRoute<BugDetailRouteProp>();
     const { bug } = route.params;
 
+    const navigation = useNavigation<AllBugsNavigationType>();
+
+    const navigateToAllBugChatScreen = () => {
+        navigation.navigate("ChatScreen", { bug });
+    }
 
     console.log('Gelen resim dosya yolu:', bug.image ? `${BASE_URL}${bug.image}` : 'Resim bulunamadı');
 
     return (
         <SafeAreaWrapper>
             <Box bg="zinc400" flex={1}>
-                <Box flex={1} mx="1" >
-
-
+                <Box flex={1} mx="1">
                     <Text variant="textXl" textAlign="center" mb="4">
                         Hata Detayları
                     </Text>
@@ -58,7 +59,7 @@ const AllBugDetail = () => {
                                 fontSize: 15,
                                 lineHeight: 19,
                                 padding: 12,
-                                alignSelf: 'flex-start',  // Bu satırı ekledim
+                                alignSelf: 'flex-start',
                             }}
                         >
                             {bug.name}
@@ -70,7 +71,7 @@ const AllBugDetail = () => {
                                 fontSize: 15,
                                 lineHeight: 19,
                                 padding: 12,
-                                alignSelf: 'flex-start',  // Bu satırı ekledim
+                                alignSelf: 'flex-start',
                             }}
                         >
                             {bug.howDidIFix}
@@ -80,17 +81,9 @@ const AllBugDetail = () => {
                     <Box mt="14" alignItems='center'>
                         <Button
                             label="Mesaj Gonder"
-                            onPress={() => { /* Geri butonu işlemi buraya */ }}
+                            onPress={navigateToAllBugChatScreen}
                         />
                     </Box>
-                    <Box mt="5" alignItems='center'>
-                        <Button
-                            label="Listeme Ekle"
-                            onPress={() => { /* Geri butonu işlemi buraya */ }}
-                        />
-                    </Box>
-
-
                 </Box>
             </Box>
         </SafeAreaWrapper>

@@ -1,6 +1,6 @@
 import { CompositeNavigationProp, NavigatorScreenParams } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { IBug } from '../types';
+import { IAllBugs, IBug } from '../types';
 
 export type HomeStackParamlist = {
     Home: undefined;
@@ -21,22 +21,28 @@ export type RootBottomTabParamList = {
     HomeStack: NavigatorScreenParams<HomeStackParamlist>;
     Today: undefined;
     MyBugs: NavigatorScreenParams<BugsStackParamList>;
-    Feed: undefined;
+    Feed: NavigatorScreenParams<AllBugsStackParamList>;
     Profile: undefined;
     CategoriesStack: NavigatorScreenParams<CategoriesStackParamList>;
 };
 
 export type BugsNavigationType = NativeStackNavigationProp<BugsStackParamList>;
+export type AllBugsNavigationType = NativeStackNavigationProp<AllBugsStackParamList>;
 
 export type BugsStackParamList = {
     Bugs: undefined;
     BugDetail: {
         bug: IBug;
     };
-    AllBugDetail: {
-        bug: IBug;
-    }
+
 };
+
+export type AllBugsStackParamList = {
+    AllBugs: undefined;
+    AllBugDetail: { bug: IAllBugs };
+    ChatScreen: { bug: IAllBugs };
+};
+
 
 export type CategoriesStackParamList = {
     Categories: undefined;

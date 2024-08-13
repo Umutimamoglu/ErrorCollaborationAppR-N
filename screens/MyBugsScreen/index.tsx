@@ -18,15 +18,13 @@ const MyBugsScreen = () => {
     const [isChecked, setIsChecked] = useState(false);
     const [searchQuery, setSearchQuery] = useState('');
 
-    const navigation = useNavigation<BugsNavigationType>(); // Type your navigation
+    const navigation = useNavigation<BugsNavigationType>();
 
     const { data, isLoading, error } = useSWR<IBug[]>(
         "api/errors/getMyErrors",
         fetcher, {
-        refreshInterval: 10000, // 10 saniye olarak değiştirildi
+        refreshInterval: 10000,
     });
-
-
 
     if (isLoading) {
         return <Loader />;
@@ -45,10 +43,13 @@ const MyBugsScreen = () => {
         );
     }
 
-    const filteredData = data?.filter(bug =>
-        bug.type.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        bug.language.toLowerCase().includes(searchQuery.toLowerCase())
-    );
+
+    const filteredData = data?.filter(bug => {
+        const matchesSearchQuery = bug.type.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            bug.language.toLowerCase().includes(searchQuery.toLowerCase());
+        const matchesIsChecked = !isChecked || bug.isFixed;
+        return matchesSearchQuery && matchesIsChecked;
+    });
 
     const renderItem = ({ item }: { item: IBug }) => (
         <Pressable onPress={() => navigation.navigate('BugDetail', { bug: item })}>
@@ -59,7 +60,6 @@ const MyBugsScreen = () => {
     return (
         <SafeAreaWraper>
             <Box bg="zinc400" flexDirection="row" alignItems="center">
-
                 <Pressable>
                     <Box ml="10" mt="3" width={140} height={40} borderRadius="rounded-5xl" bg="gray250" flexDirection="row" alignItems="center">
                         <Box m="2" ml="6" flexDirection="row" alignItems="center">
@@ -100,8 +100,6 @@ const MyBugsScreen = () => {
             <Box bg="zinc400" width={600} height={30} />
             <Box bg="zinc400" flex={1} >
                 <Box ml="5" mr="5">
-
-
                     <FlatList
                         data={filteredData}
                         showsVerticalScrollIndicator={false}
