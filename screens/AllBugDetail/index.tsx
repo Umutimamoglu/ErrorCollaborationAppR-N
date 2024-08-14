@@ -8,9 +8,10 @@ import Button from '../../src/shared/button';
 
 type BugDetailRouteProp = RouteProp<AllBugsStackParamList, 'AllBugDetail'>;
 
-const BASE_URL = 'http://192.168.1.102:1337/';
+const BASE_URL = 'http://192.168.1.100:1337/';
 
 const AllBugDetail = () => {
+
     const route = useRoute<BugDetailRouteProp>();
     const { bug } = route.params;
 

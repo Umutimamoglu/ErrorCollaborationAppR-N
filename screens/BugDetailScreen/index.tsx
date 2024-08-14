@@ -9,7 +9,7 @@ import axiosInstance from '../../service/config';
 
 type BugDetailRouteProp = RouteProp<BugsStackParamList, 'BugDetail'>;
 
-const BASE_URL = 'http://192.168.1.102:1337/';
+const BASE_URL = 'http://192.168.1.100:1337/';
 
 const BugDetailScreen = () => {
     const route = useRoute<BugDetailRouteProp>();

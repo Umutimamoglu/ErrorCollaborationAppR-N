@@ -4,6 +4,7 @@ import { Pressable } from 'react-native'
 import { Box } from '../../utils/theme'
 import { Entypo } from '@expo/vector-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import AntDesign from '@expo/vector-icons/AntDesign';
 
 
 
@@ -17,8 +18,8 @@ const NavigateBack = () => {
 
     return (
         <Pressable onPress={navigateBack}>
-            <Box mt="2" bg="gray100" borderRadius="rounded-7xl">
-                <Entypo name="chevron-small-left" size={40} color="black" />
+            <Box mt="2">
+                <AntDesign name="arrowleft" size={24} color="black" />
             </Box>
         </Pressable>
     )

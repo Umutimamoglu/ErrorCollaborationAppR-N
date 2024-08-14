@@ -43,13 +43,17 @@ const SignInScreen = () => {
 
 
             updateUser({
-                _id: user._id,  // Kullanıcı ID'sini kaydediyoruz
+                _id: user._id,  // id olmadan
+                //sender id sini belirleyemem. 
+                //O yüzden id ekledim.
+                // buradan GlobalStore a aktarıyorum
+                // ve her yerden erişeiblirm artık
                 email: user.email,
                 name: user.name,
             });
 
         } catch (error: unknown) {
-            // Hata durumunda kullanıcıya geri bildirim sağlamak için
+
             console.error("Login error:", error);
             setError('email', { type: 'manual', message: 'Giriş başarısız oldu' });
         }
