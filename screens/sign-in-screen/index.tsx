@@ -1,5 +1,5 @@
-import { Pressable } from 'react-native'
-import React from 'react'
+import React from 'react';
+import { Pressable } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { AuthScreenNavigationType } from '../../navigation/types';
 import useUserGlobalStore from '../../store/useUserGlobalStore';
@@ -14,9 +14,6 @@ import NavigateBack from '../../src/shared/navigate-back';
 
 const SignInScreen = () => {
     const navigation = useNavigation<AuthScreenNavigationType<"SignIn">>();
-    const navigateToSignUpScreen = () => {
-        navigation.navigate("SignUp");
-    };
     const { updateUser } = useUserGlobalStore();
 
     const {
@@ -35,20 +32,31 @@ const SignInScreen = () => {
         try {
             const { email, password } = data;
             console.log('Login data:', { email, password });
-            const _user = await loginUser({
+
+
+            const user = await loginUser({
                 email: email.toLowerCase(),
                 password: password,
             });
-            console.log("Login response:", _user);
+
+            console.log("Login response:", user);
+
+
             updateUser({
-                email: _user.email,
-                name: _user.name,
+                _id: user._id,  // Kullanıcı ID'sini kaydediyoruz
+                email: user.email,
+                name: user.name,
             });
 
         } catch (error: unknown) {
-
-
+            // Hata durumunda kullanıcıya geri bildirim sağlamak için
+            console.error("Login error:", error);
+            setError('email', { type: 'manual', message: 'Giriş başarısız oldu' });
         }
+    };
+
+    const navigateToSignUpScreen = () => {
+        navigation.navigate("SignUp");
     };
 
     return (
@@ -57,7 +65,7 @@ const SignInScreen = () => {
                 <Box flexDirection="row">
                     <NavigateBack />
                     <Text mt="3" ml="5" variant="textXl" fontWeight="700">
-                        tekrar hos geldiniz
+                        tekrar hoş geldiniz
                     </Text>
                 </Box>
                 <Box p="10" />
@@ -100,7 +108,6 @@ const SignInScreen = () => {
                 <Box mt="12" ml="10">
                     <Button label='Giriş Yap' onPress={handleSubmit(onSubmit)} uppercase />
                 </Box>
-
             </Box>
         </SafeAreaWraper>
     );

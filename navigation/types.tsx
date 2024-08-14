@@ -43,7 +43,6 @@ export type AllBugsStackParamList = {
     ChatScreen: { bug: IAllBugs };
 };
 
-
 export type CategoriesStackParamList = {
     Categories: undefined;
     Category: {

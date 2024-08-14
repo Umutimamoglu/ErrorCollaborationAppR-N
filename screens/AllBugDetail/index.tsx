@@ -14,6 +14,7 @@ const AllBugDetail = () => {
     const route = useRoute<BugDetailRouteProp>();
     const { bug } = route.params;
 
+
     const navigation = useNavigation<AllBugsNavigationType>();
 
     const navigateToAllBugChatScreen = () => {

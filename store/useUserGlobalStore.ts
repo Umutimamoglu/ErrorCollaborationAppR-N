@@ -6,7 +6,13 @@ import { IAuthenticatedUser } from "../types";
 interface IUserGlobalStore {
     user: IAuthenticatedUser | null;
     updateUser: (user: IAuthenticatedUser | null) => void;
+
+
 }
+
+
+
+
 const useUserGlobalStore = create<IUserGlobalStore>()(
     persist(
         (set) => ({
@@ -19,8 +25,11 @@ const useUserGlobalStore = create<IUserGlobalStore>()(
         {
             name: "ErrorCol-store",
             storage: createJSONStorage(() => AsyncStorage),
+
+
         }
     )
+
 );
 
 export default useUserGlobalStore;

@@ -11,10 +11,9 @@ import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { MaterialIcons } from '@expo/vector-icons';
 import { useTheme } from "@shopify/restyle";
 import React from "react";
-import HomeScreen from "../screens/home-screen";
-import BugsStackNavigator from "./all-bugs-stack-navigator";
-import FeedScreen from "../screens/FeedScreen";
+
 import AllBugsStackNavigator from "./all-bugs-stack-navigator";
+import BugsStackNavigator from "./bugs-stack-navigator";
 
 
 const Tab = createBottomTabNavigator<RootBottomTabParamList>()

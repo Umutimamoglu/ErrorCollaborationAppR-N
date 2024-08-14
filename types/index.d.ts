@@ -1,8 +1,10 @@
+import { StyleTransformFunction } from "@shopify/restyle";
 
 
 interface IAuthenticatedUser {
     email: string
     name: string
+    _id: string;
 }
 
 export interface IColor {
@@ -17,11 +19,19 @@ export interface IIcon {
     symbol: string
 }
 
+export interface IUserGetAllErrors {
+    _id: string;
+    name: string;
+    email: string;
+
+}
+
 export interface IUser {
     name: string;
     email: string;
     password: string;
 }
+
 
 export interface ILogin {
     email: string;
@@ -64,7 +74,7 @@ export interface IBug {
 export interface IAllBugs {
     createdAt: string | number | Date
     _id: string
-    user: IUser;
+    user: IUserGetAllErrors;
     name: string;
     isFixed: boolean;
     language: string;
