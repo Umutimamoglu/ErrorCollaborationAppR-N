@@ -30,7 +30,7 @@ const Bug = ({ bug }: BugProps) => {
             const response = await axiosInstance.delete(`/api/errors/deleteError/${bug._id}`);
             if (response.status === 200) {
                 console.log('Bug deleted successfully');
-                // Silme işleminden sonra gerekli durum güncellemelerini yapabilirsiniz
+
             } else {
                 console.error('Failed to delete bug');
             }

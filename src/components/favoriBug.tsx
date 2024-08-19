@@ -9,11 +9,11 @@ type BugProps = {
     bug: IAllBugs
 };
 
-const AllBug = ({ bug }: BugProps) => {
+const FavoriBug = ({ bug }: BugProps) => {
     const navigation = useNavigation<AllBugsNavigationType>();
 
     const navigateToBugDetailScreen = () => {
-        navigation.navigate("AllBugDetail", { bug });
+        navigation.navigate("FavoriBugDettail", { bug });
     }
 
 
@@ -32,12 +32,14 @@ const AllBug = ({ bug }: BugProps) => {
                     <Box flexDirection="row" style={{ padding: 1 }}>
                         <Text variant="textBase" fontWeight="600" mr="3">
                             {bug.user.name}
+
+
                         </Text>
                         <Text variant="textBase" fontWeight="600" mr="3">
-                            {formattedDate} {/* Tarihi gösterir */}
+                            {formattedDate}
                         </Text>
                         <Text variant="textBase" fontWeight="600" mr="3">
-                            {formattedTime} {/* Saati gösterir */}
+                            {formattedTime}
                         </Text>
                     </Box>
                 </Box>
@@ -58,4 +60,4 @@ const AllBug = ({ bug }: BugProps) => {
     )
 }
 
-export default AllBug;
+export default FavoriBug;

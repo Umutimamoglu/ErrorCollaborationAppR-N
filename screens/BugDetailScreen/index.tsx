@@ -7,9 +7,11 @@ import SafeAreaWrapper from '../../src/shared/safe-area-wrapper';
 import Button from '../../src/shared/button';
 import axiosInstance from '../../service/config';
 
+
+
+
 type BugDetailRouteProp = RouteProp<BugsStackParamList, 'BugDetail'>;
 
-const BASE_URL = 'http://192.168.1.100:1337/';
 
 const BugDetailScreen = () => {
     const route = useRoute<BugDetailRouteProp>();
@@ -52,16 +54,18 @@ const BugDetailScreen = () => {
                     {bug.image ? (
                         <Box alignItems="center" mb="2">
                             <Image
-                                source={{ uri: `${BASE_URL}${bug.image}` }}
+                                source={{ uri: `${axiosInstance.defaults.baseURL}/${bug.image}` }}
                                 style={styles.image}
                                 onError={() => console.warn('Resim yüklenemedi, varsayılan kullanılacak')}
                             />
                         </Box>
+
                     ) : (
                         <Box alignItems="center" mb="2">
                             <Text>Resim Bulunamadı</Text>
                         </Box>
                     )}
+
                     <Box bg="gray250" borderRadius="rounded-2xl" mb="4">
                         <TextInput
                             value={name}

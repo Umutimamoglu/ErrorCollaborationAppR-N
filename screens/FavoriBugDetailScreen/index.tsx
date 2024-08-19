@@ -4,15 +4,15 @@ import { useRoute, RouteProp, useNavigation } from '@react-navigation/native';
 import { AllBugsNavigationType, AllBugsStackParamList } from '../../navigation/types';
 import { Box, Text } from '../../utils/theme';
 import SafeAreaWrapper from '../../src/shared/safe-area-wrapper';
-import FontAwesome from '@expo/vector-icons/FontAwesome';
+
 import axiosInstance, { BASE_URL } from '../../service/config';
 import Button from '../../src/shared/button';
 
-type BugDetailRouteProp = RouteProp<AllBugsStackParamList, 'AllBugDetail'>;
+type BugDetailRouteProp = RouteProp<AllBugsStackParamList, 'FavoriBugDettail'>;
 
 
 
-const AllBugDetail = () => {
+const FavoriBugDettailScreen = () => {
 
     const route = useRoute<BugDetailRouteProp>();
     const { bug } = route.params;
@@ -21,7 +21,7 @@ const AllBugDetail = () => {
     const navigation = useNavigation<AllBugsNavigationType>();
 
     const navigateToAllBugChatScreen = () => {
-        navigation.navigate("ChatScreen", { bug });
+        navigation.navigate("FavoriBugDettail", { bug });
     }
 
 
@@ -78,20 +78,7 @@ const AllBugDetail = () => {
                                 <Text>Resim Bulunamadı</Text>
                             </Box>
                         )}
-                        <Pressable
-                            onPressIn={() => setPressed(true)}
-                            onPressOut={() => setPressed(false)}
-                            onPress={addToFavorites}
-                            style={({ pressed }) => [
-                                {
-                                    opacity: pressed ? 0.6 : 1,
-                                },
-                            ]}
-                        >
-                            <Box>
-                                <FontAwesome name="heart-o" size={24} color="black" />
-                            </Box>
-                        </Pressable>
+
                     </Box>
                     <Box ml='5' mr="5" bg="gray250" borderRadius="rounded-2xl" mb="4">
                         <Text
@@ -148,4 +135,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default AllBugDetail;
+export default FavoriBugDettailScreen;

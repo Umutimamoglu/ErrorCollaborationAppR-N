@@ -85,3 +85,10 @@ export interface IAllBugs {
     Date: Date;
     Time: Time;
 }
+
+interface Message {
+    _id: string;
+    sender: string;
+    message: string;
+    createdAt: string;
+}

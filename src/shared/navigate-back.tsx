@@ -18,7 +18,7 @@ const NavigateBack = () => {
 
     return (
         <Pressable onPress={navigateBack}>
-            <Box mt="2">
+            <Box mt="2" ml='3' mb='2'>
                 <AntDesign name="arrowleft" size={24} color="black" />
             </Box>
         </Pressable>

@@ -1,3 +1,4 @@
+import React from "react";
 import theme, { Box, Text } from "../../utils/theme";
 import { FieldError } from "react-hook-form";
 import { StyleSheet, TextInput, TextInputProps } from "react-native";

@@ -86,7 +86,7 @@ function HomeScreen() {
     );
 
 
-    const color: IColor = DEFAULT_COLOR; // Doğrudan tüm nesneyi atıyorsunuz
+    const color: IColor = DEFAULT_COLOR;
 
 
     const { mutate } = useSWRConfig();

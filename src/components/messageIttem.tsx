@@ -1,13 +1,9 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { Text } from '../../utils/theme';
+import { Message } from '../../types';
 
-interface Message {
-    _id: string;
-    sender: string;
-    message: string;
-    createdAt: string;
-}
+
 
 interface MessageItemProps {
     item: Message;
@@ -19,7 +15,6 @@ const MessageItem: React.FC<MessageItemProps> = ({ item, isMyMessage }) => {
         hour: '2-digit',
         minute: '2-digit',
     });
-
     return (
         <View
             style={[

@@ -6,6 +6,9 @@ import React from "react";
 import AllBugDetail from "../screens/AllBugDetail";
 import FeedScreen from "../screens/FeedScreen";
 import ChatScreen from "../screens/ChatScreen";
+import FavoriBugs from "../screens/FavoriBugs";
+import FavoriBugsScreen from "../screens/FavoriBugs";
+import FavoriBugDettailScreen from "../screens/FavoriBugDetailScreen";
 
 const Stack = createNativeStackNavigator<AllBugsStackParamList>();
 
@@ -29,6 +32,20 @@ const AllBugsStackNavigator = () => {
             <Stack.Screen
                 name="ChatScreen"
                 component={ChatScreen}
+                options={{
+                    headerShown: false,
+                }}
+            />
+            <Stack.Screen
+                name="FavoriBugs"
+                component={FavoriBugsScreen}
+                options={{
+                    headerShown: false,
+                }}
+            />
+            <Stack.Screen
+                name="FavoriBugDettail"
+                component={FavoriBugDettailScreen}
                 options={{
                     headerShown: false,
                 }}

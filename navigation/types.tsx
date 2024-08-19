@@ -41,6 +41,8 @@ export type AllBugsStackParamList = {
     AllBugs: undefined;
     AllBugDetail: { bug: IAllBugs };
     ChatScreen: { bug: IAllBugs };
+    FavoriBugs: undefined
+    FavoriBugDettail: { bug: IAllBugs }
 };
 
 export type CategoriesStackParamList = {
