@@ -8,7 +8,6 @@ import { Box, Text } from '../../utils/theme';
 type BugProps = {
     bug: IAllBugs
 };
-
 const FavoriBug = ({ bug }: BugProps) => {
     const navigation = useNavigation<AllBugsNavigationType>();
 

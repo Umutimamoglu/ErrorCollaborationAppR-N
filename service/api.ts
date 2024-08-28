@@ -1,5 +1,5 @@
 import { IUser } from "../types";
-import axiosInstance, { BLOSSOM_TOKEN_NAME, saveToken } from "./config";
+import axiosInstance, { ERROR_APP_TOKEN_NAME, saveToken } from "./config";
 
 import axios from 'axios';
 
@@ -9,15 +9,19 @@ type RegisterUserTypes = {
     email: string;
     name: string;
     password: string;
+    image: string | "bos";
+    positionTitle: string | "belirtilmemiş"
 };
 
-export const registerUser = async ({ email, name, password }: RegisterUserTypes) => {
-    console.log("Registering user:", { email, name, password });
+export const registerUser = async ({ email, name, password, image, positionTitle }: RegisterUserTypes) => {
+    console.log("Registering user:", { email, name, password, image });
     try {
         const response = await axiosInstance.post("/users/create", {
             email,
             password,
             name,
+            image,
+            positionTitle
         });
         console.log("User registration successful:", response.data.user);
         return response.data.user;

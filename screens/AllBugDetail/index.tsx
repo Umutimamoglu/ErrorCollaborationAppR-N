@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import { Image, Pressable, StyleSheet, Alert } from 'react-native';
+import { View, Image, Pressable, StyleSheet, Alert, Text } from 'react-native';
 import { useRoute, RouteProp, useNavigation } from '@react-navigation/native';
 import { AllBugsNavigationType, AllBugsStackParamList } from '../../navigation/types';
-import { Box, Text } from '../../utils/theme';
 import SafeAreaWrapper from '../../src/shared/safe-area-wrapper';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import axiosInstance, { BASE_URL } from '../../service/config';
@@ -10,20 +9,16 @@ import Button from '../../src/shared/button';
 
 type BugDetailRouteProp = RouteProp<AllBugsStackParamList, 'AllBugDetail'>;
 
-
-
 const AllBugDetail = () => {
 
     const route = useRoute<BugDetailRouteProp>();
     const { bug } = route.params;
-
 
     const navigation = useNavigation<AllBugsNavigationType>();
 
     const navigateToAllBugChatScreen = () => {
         navigation.navigate("ChatScreen", { bug });
     }
-
 
     const [pressed, setPressed] = useState(false);
 
@@ -56,95 +51,112 @@ const AllBugDetail = () => {
         }
     };
 
-
     return (
         <SafeAreaWrapper>
-            <Box bg="zinc400" flex={1}>
-                <Box flex={1} mx="1">
-                    <Text variant="textXl" textAlign="center" mb="4">
-                        Hata Detayları
-                    </Text>
-                    <Box justifyContent="space-around" flexDirection="row">
-                        {bug.image ? (
-                            <Box ml="20" alignItems="center" mb="2">
-                                <Image
-                                    source={{ uri: `${axiosInstance.defaults.baseURL}/${bug.image}` }}
-                                    style={styles.image}
-                                    onError={() => console.warn('Resim yüklenemedi, varsayılan kullanılacak')}
-                                />
-                            </Box>
-                        ) : (
-                            <Box alignItems="center" mb="2">
-                                <Text>Resim Bulunamadı</Text>
-                            </Box>
-                        )}
-                        <Pressable
-                            onPressIn={() => setPressed(true)}
-                            onPressOut={() => setPressed(false)}
-                            onPress={addToFavorites}
-                            style={({ pressed }) => [
-                                {
-                                    opacity: pressed ? 0.6 : 1,
-                                },
-                            ]}
-                        >
-                            <Box>
-                                <FontAwesome name="heart-o" size={24} color="black" />
-                            </Box>
-                        </Pressable>
-                    </Box>
-                    <Box ml='5' mr="5" bg="gray250" borderRadius="rounded-2xl" mb="4">
-                        <Text
-                            style={{
-                                fontSize: 15,
-                                lineHeight: 19,
-                                padding: 12,
-                            }}
-                        >
-                            {bug.language}
-                        </Text>
-                    </Box>
-                    <Box ml='5' mr="5" bg="gray250" borderRadius="rounded-2xl" mb="4">
-                        <Text
-                            style={{
-                                fontSize: 15,
-                                lineHeight: 19,
-                                padding: 12,
-                                alignSelf: 'flex-start',
-                            }}
-                        >
-                            {bug.name}
-                        </Text>
-                    </Box>
-                    <Box ml='5' mr="5" bg="gray250" borderRadius="rounded-2xl" mb="4">
-                        <Text
-                            style={{
-                                fontSize: 15,
-                                lineHeight: 19,
-                                padding: 12,
-                                alignSelf: 'flex-start',
-                            }}
-                        >
-                            {bug.howDidIFix}
-                        </Text>
-                    </Box>
-                    <Box mt="14" alignItems='center'>
-                        <Button
-                            label="Mesaj Gonder"
-                            onPress={navigateToAllBugChatScreen}
+            <View style={styles.container}>
+                <View style={styles.header}>
+                    <Text style={styles.headerText}>Hata Detayları</Text>
+                </View>
+
+                <View style={styles.separator} />
+
+                <View style={styles.imageContainer}>
+                    {bug.image ? (
+                        <Image
+                            source={{ uri: `${axiosInstance.defaults.baseURL}/${bug.image}` }}
+                            style={styles.image}
+                            onError={() => console.warn('Resim yüklenemedi, varsayılan kullanılacak')}
                         />
-                    </Box>
-                </Box>
-            </Box>
+                    ) : (
+                        <Text>Resim Bulunamadı</Text>
+                    )}
+                    <Pressable
+                        onPressIn={() => setPressed(true)}
+                        onPressOut={() => setPressed(false)}
+                        onPress={addToFavorites}
+                        style={({ pressed }) => [
+                            {
+                                opacity: pressed ? 0.6 : 1,
+                            },
+                        ]}
+                    >
+                        <FontAwesome name="heart-o" size={24} color="black" />
+                    </Pressable>
+                </View>
+                <View style={styles.infoContainer}>
+                    <Text style={styles.infoText}>{bug.language}</Text>
+                </View>
+                <View style={styles.infoContainer}>
+                    <Text style={styles.infoText}>{bug.name}</Text>
+                </View>
+                <View style={styles.infoContainer}>
+                    <Text style={styles.infoText}>{bug.howDidIFix}</Text>
+                </View>
+                <View style={styles.buttonContainer}>
+                    <Button label="Mesaj Gonder" onPress={navigateToAllBugChatScreen} />
+                </View>
+            </View>
         </SafeAreaWrapper>
     );
 };
 
 const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: '#D8D0D0',
+    },
+    header: {
+        marginVertical: 16,
+        alignItems: 'center',
+    },
+
+    headerText: {
+        fontSize: 24,
+        fontWeight: 'bold',
+        textShadowColor: 'rgba(239, 68, 68, 0.2)', // Kırmızı gölge rengi, %80 opaklık
+        textShadowOffset: { width: 2, height: 2 },
+        textShadowRadius: 4,
+        color: 'white',
+    },
+
+    separator: {
+        height: 1, // İnce çizgi
+        backgroundColor: '#3F3C3C', // Çizginin rengi
+        marginVertical: 16, // Çizginin yukarıdan ve aşağıdan boşluğu
+    },
+    imageContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        alignItems: 'center',
+        marginVertical: 16,
+    },
     image: {
         width: 100,
         height: 100,
         marginTop: 10,
+    },
+    infoContainer: {
+        marginHorizontal: 16,
+        backgroundColor: '#f0f0f0',
+        borderRadius: 20,
+        marginBottom: 16,
+        padding: 12,
+        borderWidth: 2, // Kenar çizgisi genişliği
+        borderColor: '#3F3C3C', // Kenar çizgisi rengi
+    },
+    infoText: {
+        fontSize: 15,
+        lineHeight: 19,
+        textAlign: 'center',
+        color: 'black', // Yazı rengi
+        fontWeight: 'bold',
+        textShadowColor: 'rgba(0, 0, 0, 0.1)', // Gölge rengi
+        textShadowOffset: { width: 2, height: 2 }, // Gölge yerleşimi
+        textShadowRadius: 4, // Gölge genişliği
+    },
+    buttonContainer: {
+        marginTop: 56,
+        alignItems: 'center',
     },
 });
 

@@ -43,13 +43,11 @@ const SignInScreen = () => {
 
 
             updateUser({
-                _id: user._id,  // id olmadan
-                //sender id sini belirleyemem. 
-                //O yüzden id ekledim.
-                // buradan GlobalStore a aktarıyorum
-                // ve her yerden erişeiblirm artık
+                _id: user._id,
                 email: user.email,
                 name: user.name,
+                image: user.image,
+                positionTitle: user.positionTitle
             });
 
         } catch (error: unknown) {

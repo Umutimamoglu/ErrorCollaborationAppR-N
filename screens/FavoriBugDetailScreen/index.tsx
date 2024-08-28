@@ -21,41 +21,8 @@ const FavoriBugDettailScreen = () => {
     const navigation = useNavigation<AllBugsNavigationType>();
 
     const navigateToAllBugChatScreen = () => {
-        navigation.navigate("FavoriBugDettail", { bug });
+        navigation.navigate("ChatScreen", { bug });
     }
-
-
-    const [pressed, setPressed] = useState(false);
-
-    const addToFavorites = async () => {
-        try {
-            const data = {
-                name: bug.name,
-                isFixed: bug.isFixed,
-                image: bug.image ? `${BASE_URL}${bug.image}` : null,
-                color: {
-                    id: bug.color.id,
-                    name: bug.color.name,
-                    code: bug.color.code
-                },
-                language: bug.language,
-                type: bug.type,
-                howDidIFix: bug.howDidIFix || ''
-            };
-
-            await axiosInstance.post('/api/errors/addToFavorites', data, {
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            });
-
-            Alert.alert("Başarıyla eklendi", "Hata favorilere eklendi!");
-        } catch (error) {
-            console.error('Error adding to favorites:', error.response?.data || error.message);
-            Alert.alert("Hata", "Favorilere eklerken bir hata oluştu.");
-        }
-    };
-
 
     return (
         <SafeAreaWrapper>

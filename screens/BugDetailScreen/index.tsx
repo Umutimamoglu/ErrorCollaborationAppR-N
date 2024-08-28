@@ -52,7 +52,7 @@ const BugDetailScreen = () => {
                         Hata Detayları
                     </Text>
                     {bug.image ? (
-                        <Box alignItems="center" mb="2">
+                        <Box alignItems="center" mb="20">
                             <Image
                                 source={{ uri: `${axiosInstance.defaults.baseURL}/${bug.image}` }}
                                 style={styles.image}
@@ -89,20 +89,20 @@ const BugDetailScreen = () => {
                             }}
                         />
                     </Box>
-                    <Box flexDirection="row" alignItems="center" mb="4">
+                    <Box flexDirection="row" ml='2' alignItems="center" mb="4">
                         <Text mr="3">is-Fixed:</Text>
                         <Pressable onPress={toggleIsFixed}>
                             <Box
                                 bg={isFixed ? "green400" : "red400"}
                                 px="3"
                                 py="2"
-                                borderRadius="rounded-4xl"
+                                borderRadius="rounded-2xl"
                             >
                                 <Text color="white">{isFixed ? "Evet" : "Hayır"}</Text>
                             </Box>
                         </Pressable>
                     </Box>
-                    <Box mb="1" alignItems='center'>
+                    <Box mb="1" mt='20' alignItems='center'>
                         <Button
                             label="Güncelle"
                             onPress={updateBug}

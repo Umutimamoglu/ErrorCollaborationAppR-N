@@ -4,7 +4,7 @@ import useSWR from 'swr';
 import { IAllBugs, IBug } from '../../types';
 import { fetcher } from '../../service/config';
 import Loader from '../../src/shared/loader';
-import Bug from '../../src/components/bug';
+
 import SafeAreaWraper from '../../src/shared/safe-area-wrapper';
 import { Box, Text } from '../../utils/theme';
 import AntDesign from '@expo/vector-icons/AntDesign';

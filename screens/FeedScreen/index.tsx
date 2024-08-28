@@ -20,7 +20,7 @@ const FeedScreen = () => {
     const { data, isLoading, error } = useSWR<IAllBugs[]>(
         "api/errors/getAllErrors",
         fetcher, {
-        refreshInterval: 10000, // 10 saniyede bir veri yenileme
+        refreshInterval: 10000,
     });
 
     if (isLoading) {
@@ -109,7 +109,7 @@ const FeedScreen = () => {
 
 const styles = StyleSheet.create({
     button: {
-        backgroundColor: 'red', // Butonun arka plan rengi
+        backgroundColor: '#ef4444', // Butonun arka plan rengi
         paddingVertical: 8, // Dikey iç dolgu
         paddingHorizontal: 12, // Yatay iç dolgu
         borderRadius: 8, // Köşelerin yuvarlaklığı

@@ -37,5 +37,4 @@ const AuthStackNavigator = () => {
         </Stack.Navigator>
     )
 }
-
 export default AuthStackNavigator

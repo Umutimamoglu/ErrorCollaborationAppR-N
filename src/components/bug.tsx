@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Pressable, View } from 'react-native';
-import { IBug } from '../../types';
+import { IAllBugs, IBug } from '../../types';
 import { useNavigation } from '@react-navigation/native';
 import { BugsNavigationType } from '../../navigation/types';
 import { Box, Text } from '../../utils/theme';
@@ -14,7 +14,7 @@ type BugProps = {
 
 
 const Bug = ({ bug }: BugProps) => {
-    const [isPressed, setIsPressed] = useState(false); // Basma durumu için state tanımlayın
+    const [isPressed, setIsPressed] = useState(false);
     const navigation = useNavigation<BugsNavigationType>();
 
     const navigateToBugDetailScreen = () => {
@@ -58,12 +58,13 @@ const Bug = ({ bug }: BugProps) => {
                         </Text>
                         <Pressable
                             onPress={deleteBug}
-                            onPressIn={() => setIsPressed(true)}  // Basma işlemi başladığında
-                            onPressOut={() => setIsPressed(false)} // Basma işlemi bittiğinde
+                            onPressIn={() => setIsPressed(true)}
+                            onPressOut={() => setIsPressed(false)}
                             style={({ pressed }) => [
                                 {
-                                    opacity: pressed ? 0.5 : 1, // Basıldığında opaklığı azalt
-                                    transform: pressed ? [{ scale: 0.9 }] : [{ scale: 1 }] // Basıldığında küçült
+                                    opacity: pressed ? 0.5 : 1,
+                                    transform: pressed ? [{ scale: 0.9 }] : [{ scale: 1 }]
+
                                 }
                             ]}
                         >

@@ -5,6 +5,8 @@ interface IAuthenticatedUser {
     email: string
     name: string
     _id: string;
+    image?: string | null;
+    positionTitle: string,
 }
 
 export interface IColor {
@@ -30,6 +32,7 @@ export interface IUser {
     name: string;
     email: string;
     password: string;
+    image: string;
 }
 
 
@@ -92,3 +95,4 @@ interface Message {
     message: string;
     createdAt: string;
 }
+

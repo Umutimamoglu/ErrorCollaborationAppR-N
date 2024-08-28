@@ -8,13 +8,8 @@ import { RouteProp, useRoute } from '@react-navigation/native';
 import { AllBugsStackParamList } from '../../navigation/types';
 import MessageItem from '../../src/components/messageIttem'
 import NavigateBack from '../../src/shared/navigate-back';
+import { Message } from '../../types';
 
-interface Message {
-    _id: string;
-    sender: string;
-    message: string;
-    createdAt: string;
-}
 
 type ChatScreenRouteProp = RouteProp<AllBugsStackParamList, 'ChatScreen'>;
 

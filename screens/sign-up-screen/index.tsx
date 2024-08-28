@@ -10,7 +10,6 @@ import { Box, Text } from '../../utils/theme';
 import Button from '../../src/shared/button';
 import SafeAreaWraper from '../../src/shared/safe-area-wrapper';
 
-import { Feather } from '@expo/vector-icons';
 import NavigateBack from '../../src/shared/navigate-back';
 
 
@@ -19,6 +18,8 @@ interface IUser {
     name: string;
     email: string;
     password: string;
+    image: string | "bos";
+    positionTitle: string | "belirtilmemiş"
 }
 
 const SignUpScreen = () => {
@@ -32,17 +33,21 @@ const SignUpScreen = () => {
             name: "",
             email: "",
             password: "",
+            image: "bos",
+            positionTitle: "belirtilmemiş"
         },
     });
 
     const onSubmit = async (data: IUser) => {
         try {
-            const { email, name, password } = data;
-            console.log('Registering user:', { email, name, password });
+            const { email, name, password, image, positionTitle } = data;
+            console.log('Registering user:', { email, name, password, image });
             await registerUser({
                 email,
                 name,
-                password
+                password,
+                image,
+                positionTitle,
             });
             navigateToSignInScreen();
         } catch (error: unknown) {
